@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "978923627962",
+    "project_id": "elever-29a7a",
+    "storage_bucket": "elever-29a7a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:978923627962:android:384b50a12364b924c2a983",
+        "android_client_info": {
+          "package_name": "com.example.eleverdev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "978923627962-41eninke5ek2rdvear9hdcl0uclbbftr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlGnRscLclZGGSwhZUWpRIys7oT-K_yjQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "978923627962-41eninke5ek2rdvear9hdcl0uclbbftr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
