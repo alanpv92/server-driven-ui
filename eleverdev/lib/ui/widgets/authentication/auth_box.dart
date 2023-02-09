@@ -42,7 +42,7 @@ class _AuthBoxState extends State<AuthBox> {
                 child: SizedBox(
                   width: MediaQueryHelper(context).safeBlockHorizontal * 40,
                   height: MediaQueryHelper(context).safeBlockVertical * 4,
-                  child: ElevatedButton(
+                  child:authControllerProvider.isloading?const  Center(child: CircularProgressIndicator(),): ElevatedButton(
                       style:
                           ElevatedButton.styleFrom(shape: const StadiumBorder()),
                       onPressed: authControllerProvider.authenticate,

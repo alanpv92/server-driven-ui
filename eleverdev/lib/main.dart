@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:eleverdev/controllers/authentication.dart';
 import 'package:eleverdev/firebase_options.dart';
@@ -14,7 +16,7 @@ void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await EasyLocalization.ensureInitialized();
-  
+
   runApp(EasyLocalization(
       path: 'assets/translations',
       supportedLocales: const [Locale('en')],
@@ -33,14 +35,13 @@ class MyApp extends StatelessWidget {
           create: (context) => AuthenticationController(),
         ),
       ],
-      child:GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        supportedLocales: context.supportedLocales,
-        localizationsDelegates: context.localizationDelegates,
-        locale: context.locale,
-        theme: ThemeManger.instance.getApplicationTheme,
-        home:const AuthManger()
-      ),
+      child: GetMaterialApp(
+          debugShowCheckedModeBanner: false,
+          supportedLocales: context.supportedLocales,
+          localizationsDelegates: context.localizationDelegates,
+          locale: context.locale,
+          theme: ThemeManger.instance.getApplicationTheme,
+          home: const AuthManger()),
     );
   }
 }
@@ -53,9 +54,17 @@ class AuthManger extends StatelessWidget {
     return StreamBuilder(
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        }
         if (snapshot.hasData) {
           return const HomeScreen();
         }
+
         return const AuthenticationScreen();
       },
     );

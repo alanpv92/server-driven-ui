@@ -33,4 +33,8 @@ class FirebaseAuthService {
           status: false, errorMessage: 'some error occured');
     }
   }
+
+  Future logout() async {
+    await _firebaseAuth.signOut();
+  }
 }

@@ -85,17 +85,23 @@ class AuthenticationController extends BaseController {
 
   authenticate() async {
     if (authFormKey.currentState!.validate()) {
+      late FirebaseResponse firebaseResponse;
+      changeLoadingStatus(true);
       if (authMode == AuthMode.registration) {
-        final FirebaseResponse firebaseResponse =
-            await _firebaseAuthService.createAccount(
-                email: emailController.text.trim(),
-                password: passwordController.text);
+        firebaseResponse = await _firebaseAuthService.createAccount(
+            email: emailController.text.trim(),
+            password: passwordController.text);
         if (!firebaseResponse.status) {
           ShowSnackBar.showError(
               errorMessage:
                   firebaseResponse.errorMessage ?? "some error occured");
         }
       }
+      changeLoadingStatus(false);
     }
+  }
+
+  onlogOut() {
+    _firebaseAuthService.logout();
   }
 }
