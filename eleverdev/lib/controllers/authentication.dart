@@ -1,8 +1,11 @@
 import 'dart:developer';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:eleverdev/controllers/base.dart';
 import 'package:eleverdev/data/enum/enums.dart';
 import 'package:eleverdev/data/models/firebase_response.dart';
+import 'package:eleverdev/helpers/snack_bar.dart';
+
 import 'package:eleverdev/mangers/text.dart';
 import 'package:eleverdev/services/firebase/firebase_auth.dart';
 import 'package:eleverdev/ui/widgets/common/custom_text_form_field.dart';
@@ -88,7 +91,9 @@ class AuthenticationController extends BaseController {
                 email: emailController.text.trim(),
                 password: passwordController.text);
         if (!firebaseResponse.status) {
-          log(firebaseResponse.errorMessage.toString());
+          ShowSnackBar.showError(
+              errorMessage:
+                  firebaseResponse.errorMessage ?? "some error occured");
         }
       }
     }

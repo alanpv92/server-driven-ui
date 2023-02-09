@@ -7,12 +7,14 @@ import 'package:eleverdev/ui/screens/home_screen/home_scree.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 import 'package:provider/provider.dart';
 
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await EasyLocalization.ensureInitialized();
+  
   runApp(EasyLocalization(
       path: 'assets/translations',
       supportedLocales: const [Locale('en')],
@@ -31,7 +33,7 @@ class MyApp extends StatelessWidget {
           create: (context) => AuthenticationController(),
         ),
       ],
-      child: MaterialApp(
+      child:GetMaterialApp(
         debugShowCheckedModeBanner: false,
         supportedLocales: context.supportedLocales,
         localizationsDelegates: context.localizationDelegates,
