@@ -1,6 +1,10 @@
+import 'dart:developer';
+
 import 'package:eleverdev/controllers/base.dart';
 import 'package:eleverdev/data/enum/enums.dart';
+import 'package:eleverdev/data/models/firebase_response.dart';
 import 'package:eleverdev/mangers/text.dart';
+import 'package:eleverdev/services/firebase/firebase_auth.dart';
 import 'package:eleverdev/ui/widgets/common/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +16,7 @@ class AuthenticationController extends BaseController {
   final List<CustomTextFormField> authFields = [];
 
   AuthMode authMode = AuthMode.login;
-
+  final FirebaseAuthService _firebaseAuthService = FirebaseAuthService();
   initAuthBox() {
     authFormKey = GlobalKey<FormState>();
     emailController = TextEditingController();
@@ -76,9 +80,17 @@ class AuthenticationController extends BaseController {
     return TextManger.instance.authLoginRedirect;
   }
 
-  authenticate() {
+  authenticate() async {
     if (authFormKey.currentState!.validate()) {
-      
+      if (authMode == AuthMode.registration) {
+        final FirebaseResponse firebaseResponse =
+            await _firebaseAuthService.createAccount(
+                email: emailController.text.trim(),
+                password: passwordController.text);
+        if (!firebaseResponse.status) {
+          log(firebaseResponse.errorMessage.toString());
+        }
+      }
     }
   }
 }
