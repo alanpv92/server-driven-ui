@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
+
 class AuthTextManger {
- final String heading = 'Welcome Back';
+ final String heading = tr('auth_heading');
 }
 
 class TextManger with AuthTextManger {
