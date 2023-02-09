@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (context) => Authentication(),
+          create: (context) => AuthenticationController(),
         ),
       ],
       child: MaterialApp(

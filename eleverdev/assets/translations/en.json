@@ -1,3 +1,5 @@
 {
-  "auth_heading":"Welcome Back"
+  "auth_heading":"Welcome Back",
+  "auth_create_account":"create account",
+  "auth_login_redirect":"already have an account ?"
 }

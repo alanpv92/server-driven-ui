@@ -1,8 +1,10 @@
+import 'package:eleverdev/controllers/authentication.dart';
 import 'package:eleverdev/helpers/media_query.dart';
 import 'package:eleverdev/ui/widgets/authentication/auth_box.dart';
 import 'package:eleverdev/ui/widgets/authentication/welcome_heading.dart';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AuthenticationScreen extends StatelessWidget {
   const AuthenticationScreen({super.key});
@@ -18,9 +20,20 @@ class AuthenticationScreen extends StatelessWidget {
         child: SizedBox(
           width: double.infinity,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: const [WelcomeHeading(), AuthBox()],
+            children: [
+              const Spacer(),
+              const WelcomeHeading(),
+              const AuthBox(),
+              const Spacer(),
+              Consumer<AuthenticationController>(
+                builder: (context, value, child) {
+                  return TextButton(
+                      onPressed: value.changeAuthMode,
+                      child: Text(value.getAuthStatusChangeText()));
+                },
+              ),
+            ],
           ),
         ),
       )),
