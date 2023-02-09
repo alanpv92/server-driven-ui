@@ -1,6 +1,3 @@
-import 'dart:developer';
-
-import 'package:easy_localization/easy_localization.dart';
 import 'package:eleverdev/controllers/base.dart';
 import 'package:eleverdev/data/enum/enums.dart';
 import 'package:eleverdev/data/models/firebase_response.dart';
@@ -91,13 +88,19 @@ class AuthenticationController extends BaseController {
         firebaseResponse = await _firebaseAuthService.createAccount(
             email: emailController.text.trim(),
             password: passwordController.text);
-        if (!firebaseResponse.status) {
-          ShowSnackBar.showError(
-              errorMessage:
-                  firebaseResponse.errorMessage ?? "some error occured");
-        }
+      } else {
+        firebaseResponse = await _firebaseAuthService.loginUser(
+            email: emailController.text.trim(),
+            password: passwordController.text);
+      }
+      if (!firebaseResponse.status) {
+        ShowSnackBar.showError(
+            errorMessage:
+                firebaseResponse.errorMessage ?? "some error occured");
+         
       }
       changeLoadingStatus(false);
+     
     }
   }
 

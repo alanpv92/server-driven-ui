@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
           localizationsDelegates: context.localizationDelegates,
           locale: context.locale,
           theme: ThemeManger.instance.getApplicationTheme,
-          home: const AuthManger()),
+          home: AuthenticationScreen()),
     );
   }
 }
@@ -54,6 +54,7 @@ class AuthManger extends StatelessWidget {
     return StreamBuilder(
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
+      
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Scaffold(
             body: Center(
@@ -64,7 +65,7 @@ class AuthManger extends StatelessWidget {
         if (snapshot.hasData) {
           return const HomeScreen();
         }
-
+        log('i am being called');
         return const AuthenticationScreen();
       },
     );
