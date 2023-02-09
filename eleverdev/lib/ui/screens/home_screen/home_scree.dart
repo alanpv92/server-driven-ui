@@ -13,7 +13,7 @@ class HomeScreen extends StatelessWidget {
             onPressed:
                 Provider.of<AuthenticationController>(context, listen: false)
                     .onlogOut,
-            child: Text("log out")),
+            child:const Text("log out")),
       ),
     );
   }
