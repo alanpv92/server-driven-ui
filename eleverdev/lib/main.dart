@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
           localizationsDelegates: context.localizationDelegates,
           locale: context.locale,
           theme: ThemeManger.instance.getApplicationTheme,
-          home: AuthenticationScreen()),
+          home:const AuthManger()),
     );
   }
 }
@@ -65,7 +65,7 @@ class AuthManger extends StatelessWidget {
         if (snapshot.hasData) {
           return const HomeScreen();
         }
-        log('i am being called');
+       
         return const AuthenticationScreen();
       },
     );

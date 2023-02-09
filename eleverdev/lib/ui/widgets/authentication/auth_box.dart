@@ -19,12 +19,6 @@ class _AuthBoxState extends State<AuthBox> {
   }
 
   @override
-  void dispose() {
-    Provider.of<AuthenticationController>(context, listen: false).dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final authControllerProvider = Provider.of<AuthenticationController>(context);
     return Card(

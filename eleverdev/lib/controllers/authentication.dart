@@ -34,11 +34,6 @@ class AuthenticationController extends BaseController {
     ]);
   }
 
-  disposeAuthBox() {
-    emailController.dispose();
-    passwordController.dispose();
-  }
-
   void changeAuthMode() {
     authFormKey.currentState!.reset();
     if (authMode == AuthMode.login) {
@@ -97,11 +92,18 @@ class AuthenticationController extends BaseController {
         ShowSnackBar.showError(
             errorMessage:
                 firebaseResponse.errorMessage ?? "some error occured");
-         
+      } else {
+        authControllerDisposer();
       }
       changeLoadingStatus(false);
-     
     }
+  }
+
+  authControllerDisposer() {
+    authFields.clear();
+    emailController.dispose();
+    passwordController.dispose();
+    authMode = AuthMode.login;
   }
 
   onlogOut() {
