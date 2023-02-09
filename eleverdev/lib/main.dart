@@ -3,6 +3,8 @@ import 'package:eleverdev/controllers/authentication.dart';
 import 'package:eleverdev/firebase_options.dart';
 import 'package:eleverdev/mangers/theme.dart';
 import 'package:eleverdev/ui/screens/authentication/authentication.dart';
+import 'package:eleverdev/ui/screens/home_screen/home_scree.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -35,8 +37,25 @@ class MyApp extends StatelessWidget {
         localizationsDelegates: context.localizationDelegates,
         locale: context.locale,
         theme: ThemeManger.instance.getApplicationTheme,
-        home: const AuthenticationScreen(),
+        home:const AuthManger()
       ),
+    );
+  }
+}
+
+class AuthManger extends StatelessWidget {
+  const AuthManger({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return const HomeScreen();
+        }
+        return const AuthenticationScreen();
+      },
     );
   }
 }

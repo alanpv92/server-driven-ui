@@ -17,23 +17,26 @@ class AuthenticationScreen extends StatelessWidget {
         padding: EdgeInsets.symmetric(
           horizontal: MediaQueryHelper(context).safeBlockHorizontal * 10,
         ),
-        child: SizedBox(
-          width: double.infinity,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Spacer(),
-              const WelcomeHeading(),
-              const AuthBox(),
-              const Spacer(),
-              Consumer<AuthenticationController>(
-                builder: (context, value, child) {
-                  return TextButton(
-                      onPressed: value.changeAuthMode,
-                      child: Text(value.getAuthStatusChangeText()));
-                },
-              ),
-            ],
+        child: SingleChildScrollView(
+          child: SizedBox(
+            width: double.infinity,
+            height: MediaQueryHelper(context).safeBlockVertical*100,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Spacer(),
+                const WelcomeHeading(),
+                const AuthBox(),
+                const Spacer(),
+                Consumer<AuthenticationController>(
+                  builder: (context, value, child) {
+                    return TextButton(
+                        onPressed: value.changeAuthMode,
+                        child: Text(value.getAuthStatusChangeText()));
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       )),
