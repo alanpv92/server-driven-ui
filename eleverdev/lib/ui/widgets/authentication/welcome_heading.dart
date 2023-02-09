@@ -7,15 +7,12 @@ class WelcomeHeading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme=Theme.of(context);
+    final theme = Theme.of(context);
     return Container(
       margin: EdgeInsets.symmetric(
           vertical: MediaQueryHelper(context).safeBlockVertical * 5),
-      height: MediaQueryHelper(context).safeBlockVertical * 20,
-      child:  Text(
-        TextManger.instance.heading,
-        style: theme.textTheme.headline5
-      ),
+      child:
+          Text(TextManger.instance.heading, style: theme.textTheme.headline5),
     );
   }
 }
