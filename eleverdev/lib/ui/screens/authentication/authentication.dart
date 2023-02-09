@@ -1,6 +1,7 @@
 import 'package:eleverdev/helpers/media_query.dart';
+import 'package:eleverdev/ui/widgets/authentication/auth_box.dart';
 import 'package:eleverdev/ui/widgets/authentication/welcome_heading.dart';
-import 'package:eleverdev/ui/widgets/common/custom_text_form_field.dart';
+
 import 'package:flutter/material.dart';
 
 class AuthenticationScreen extends StatelessWidget {
@@ -19,15 +20,7 @@ class AuthenticationScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const WelcomeHeading(),
-              Card(
-                child: Container(
-                  
-                  child: const CustomTextFormField(hintText: 'email'),
-                ),
-              )
-            ],
+            children: const [WelcomeHeading(), AuthBox()],
           ),
         ),
       )),
