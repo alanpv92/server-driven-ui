@@ -1,4 +1,5 @@
 import 'package:eleverdev/controllers/authentication.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,7 +14,7 @@ class HomeScreen extends StatelessWidget {
             onPressed:
                 Provider.of<AuthenticationController>(context, listen: false)
                     .onlogOut,
-            child:const Text("log out")),
+            child: const Text("log out")),
       ),
     );
   }

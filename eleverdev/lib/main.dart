@@ -54,7 +54,6 @@ class AuthManger extends StatelessWidget {
     return StreamBuilder(
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
-      
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Scaffold(
             body: Center(
@@ -65,7 +64,6 @@ class AuthManger extends StatelessWidget {
         if (snapshot.hasData) {
           return const HomeScreen();
         }
-       
         return const AuthenticationScreen();
       },
     );
