@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:eleverdev/data/extentions/extentions.dart';
 import 'package:eleverdev/helpers/font_weight.dart';

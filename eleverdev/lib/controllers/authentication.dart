@@ -18,6 +18,10 @@ class AuthenticationController extends BaseController {
   AuthMode authMode = AuthMode.login;
   final FirebaseAuthService _firebaseAuthService = FirebaseAuthService();
   initAuthBox() {
+    /*
+    This function initializes all the controllers and keys for Authentication
+    This function also populates authFields list with required CustomTextFormField widgets
+    */
     authFormKey = GlobalKey<FormState>();
     emailController = TextEditingController();
     passwordController = TextEditingController();
@@ -35,6 +39,12 @@ class AuthenticationController extends BaseController {
   }
 
   void changeAuthMode() {
+    /*
+     This function toggles between auth modes (login and registration)
+     if authmode is register it adds an confirm password field to authFields
+     if authmode is login then it removes the added field from authFields
+    */
+
     authFormKey.currentState!.reset();
     if (authMode == AuthMode.login) {
       authFields.add(CustomTextFormField(
@@ -62,6 +72,11 @@ class AuthenticationController extends BaseController {
   }
 
   getAuthButtonText() {
+    /*
+    
+      This function returns submit button text based on authMode
+
+    */
     if (authMode == AuthMode.login) {
       return TextManger.instance.authLogInButton;
     }
@@ -69,6 +84,10 @@ class AuthenticationController extends BaseController {
   }
 
   getAuthStatusChangeText() {
+    /*
+      This function returns text for changing authMode
+    */
+
     if (authMode == AuthMode.login) {
       return TextManger.instance.authCreateAccount;
     }
@@ -76,6 +95,15 @@ class AuthenticationController extends BaseController {
   }
 
   authenticate() async {
+    /*
+
+     This function is used to authenticate user,
+     function validates form,if any field is empty shows an warning and prevent user from authenticating
+     if authmode is login loginUser function is called else createAccount function is called
+     both these functions return firebaseResponse which contains status if tells if it was sucess or failure
+     if it was failure error message is shown else user is logged in
+
+    */
     if (authFormKey.currentState!.validate()) {
       late FirebaseResponse firebaseResponse;
       changeLoadingStatus(true);
@@ -100,6 +128,11 @@ class AuthenticationController extends BaseController {
   }
 
   authControllerDisposer() {
+    /*
+
+   this function is used to clear all controller after login
+
+    */
     authFields.clear();
     emailController.dispose();
     passwordController.dispose();
@@ -107,6 +140,12 @@ class AuthenticationController extends BaseController {
   }
 
   onlogOut() {
+    /*
+    
+    This function is used to log out user
+
+
+    */
     _firebaseAuthService.logout();
   }
 }

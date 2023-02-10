@@ -21,6 +21,11 @@ class FirebaseFireStoreService {
   }
 
   Future configureData() async {
+    /*
+
+    This function is used to prove intial data
+
+    */
     final cardConfig =
         _firebaseFirestore.collection(FirebaseManger.cardConfigCollection);
     final card1 = <String, dynamic>{

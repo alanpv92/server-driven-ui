@@ -4,7 +4,6 @@ import 'package:eleverdev/controllers/home_page.dart';
 import 'package:eleverdev/firebase_options.dart';
 import 'package:eleverdev/mangers/theme.dart';
 
-
 import 'package:eleverdev/ui/screens/authentication/authentication.dart';
 import 'package:eleverdev/ui/screens/home_screen/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -29,7 +28,6 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
@@ -49,6 +47,13 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+/*
+
+AuthManger listens for authStateChanges and if user is logged in HomeScreen is shown else AuthenticationScreen is shown
+
+
+*/
 
 class AuthManger extends StatelessWidget {
   const AuthManger({super.key});
