@@ -10,17 +10,19 @@ class CardModel {
 
   CardModel._({required this.position, required this.widget});
 
-  factory CardModel(
-      {required Map<String, dynamic> elementData}) {
-   
+  factory CardModel({required Map<String, dynamic> elementData}) {
     final String? text = elementData['text'];
     final Color? bgColor = HexColor.fromHex(elementData['bgColor']);
-    final Color? textColor =
-        HexColor.fromHex(elementData['textStyle']['color']);
-    final double? fontSize =
-        double.tryParse(elementData['textStyle']['fontSize'].toString());
-    final FontWeight? fontWeight = FontWeightHelper.getFontWeight(
-        int.tryParse(elementData['textStyle']['fontWeight'].toString()));
+    final Color? textColor = elementData['textStyle'] != null
+        ? HexColor.fromHex(elementData['textStyle']['color'])
+        : null;
+    final double? fontSize = elementData['textStyle'] != null
+        ? double.tryParse(elementData['textStyle']['fontSize'].toString())
+        : null;
+    final FontWeight? fontWeight = elementData['textStyle'] != null
+        ? FontWeightHelper.getFontWeight(
+            int.tryParse(elementData['textStyle']['fontWeight'].toString()))
+        : null;
     final bool visibility = elementData['visibility'];
     final String? imageUrl = elementData['imageUrl'];
     final double? imageCons =
@@ -36,18 +38,17 @@ class CardModel {
           color: bgColor,
           child: Column(
             children: [
-              ListTile(
-                title: text != null
-                    ? Text(
-                        text,
-                        style: TextStyle(
-                          color: textColor,
-                          fontSize: fontSize,
-                          fontWeight: fontWeight,
-                        ),
-                      )
-                    : null,
-              ),
+              text != null
+                  ? ListTile(
+                      title: Text(
+                      text,
+                      style: TextStyle(
+                        color: textColor,
+                        fontSize: fontSize,
+                        fontWeight: fontWeight,
+                      ),
+                    ))
+                  : const SizedBox(),
               imageUrl != null
                   ? Container(
                       width: double.infinity,
@@ -72,6 +73,6 @@ class CardModel {
           ),
         ));
 
-    return CardModel._(position: elementData['pos']??-1, widget: widget);
+    return CardModel._(position: elementData['pos'] ?? -1, widget: widget);
   }
 }
