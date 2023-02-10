@@ -11,7 +11,12 @@ class AuthTextManger {
   final String authRegisterButton = "Sign Up";
 }
 
-class TextManger with AuthTextManger {
+class CommonTextManger {
+  final String appBarTitle = "Elever-Dev";
+  final String errorText = tr('show_tost_error');
+}
+
+class TextManger with AuthTextManger, CommonTextManger {
   TextManger._();
   static TextManger instance = TextManger._();
   factory TextManger() => instance;

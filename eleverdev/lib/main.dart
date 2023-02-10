@@ -2,10 +2,11 @@
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:eleverdev/controllers/authentication.dart';
+import 'package:eleverdev/controllers/home_page.dart';
 import 'package:eleverdev/firebase_options.dart';
 import 'package:eleverdev/mangers/theme.dart';
 import 'package:eleverdev/ui/screens/authentication/authentication.dart';
-import 'package:eleverdev/ui/screens/home_screen/home_scree.dart';
+import 'package:eleverdev/ui/screens/home_screen/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => AuthenticationController(),
         ),
+        ChangeNotifierProvider(create: (context) => HomePageController(),)
       ],
       child: GetMaterialApp(
           debugShowCheckedModeBanner: false,
