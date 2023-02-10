@@ -1,10 +1,10 @@
-
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:eleverdev/controllers/authentication.dart';
 import 'package:eleverdev/controllers/home_page.dart';
 import 'package:eleverdev/firebase_options.dart';
 import 'package:eleverdev/mangers/theme.dart';
+
+
 import 'package:eleverdev/ui/screens/authentication/authentication.dart';
 import 'package:eleverdev/ui/screens/home_screen/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -27,15 +27,17 @@ void main(List<String> args) async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
+  
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
           create: (context) => AuthenticationController(),
         ),
-        ChangeNotifierProvider(create: (context) => HomePageController(),)
+        ChangeNotifierProvider(
+          create: (context) => HomePageController(),
+        )
       ],
       child: GetMaterialApp(
           debugShowCheckedModeBanner: false,
@@ -43,7 +45,7 @@ class MyApp extends StatelessWidget {
           localizationsDelegates: context.localizationDelegates,
           locale: context.locale,
           theme: ThemeManger.instance.getApplicationTheme,
-          home:const AuthManger()),
+          home: const AuthManger()),
     );
   }
 }
