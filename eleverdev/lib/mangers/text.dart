@@ -15,6 +15,7 @@ class CommonTextManger {
   final String appBarTitle = "Elever-Dev";
   final String errorText = tr('show_tost_error');
   final String noData = tr('no_data');
+  final String errorScreenContent = tr('oops something went wrong');
 }
 
 class TextManger with AuthTextManger, CommonTextManger {

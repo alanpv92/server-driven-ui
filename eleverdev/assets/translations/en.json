@@ -3,5 +3,6 @@
   "auth_create_account":"create account",
   "auth_login_redirect":"already have an account ?",
   "show_tost_error":"some error occurred",
-  "no_data":"No Data"
+  "no_data":"No Data",
+  "error_page_content":"oops something went wrong"
 }
