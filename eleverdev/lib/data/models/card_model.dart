@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:eleverdev/data/extentions/extentions.dart';
 import 'package:eleverdev/helpers/font_weight.dart';
 import 'package:flutter/material.dart';
@@ -85,6 +87,7 @@ class CardModel {
     if (onPressData == null || onPressData['type'] == null) {
       return;
     }
+    log(onPressData.toString());
     switch (onPressData['type']) {
       case 'route':
         Get.toNamed(onPressData['onPress']);

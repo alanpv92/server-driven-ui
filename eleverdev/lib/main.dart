@@ -42,7 +42,8 @@ class MyApp extends StatelessWidget {
           supportedLocales: context.supportedLocales,
           localizationsDelegates: context.localizationDelegates,
           locale: context.locale,
-          onUnknownRoute: RouteManger.getUnknownRoute,
+          getPages: RouteManger.getRoutes(),
+          unknownRoute:RouteManger.getErrorPage() ,
           theme: ThemeManger.instance.getApplicationTheme,
           home: const AuthManger()),
     );
