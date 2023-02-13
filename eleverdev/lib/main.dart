@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:eleverdev/controllers/authentication.dart';
 import 'package:eleverdev/controllers/home_page.dart';
 import 'package:eleverdev/firebase_options.dart';
+import 'package:eleverdev/mangers/asset.dart';
 import 'package:eleverdev/mangers/routes.dart';
 import 'package:eleverdev/mangers/theme.dart';
 import 'package:eleverdev/ui/screens/authentication/authentication.dart';
@@ -18,7 +19,7 @@ void main(List<String> args) async {
   await EasyLocalization.ensureInitialized();
 
   runApp(EasyLocalization(
-      path: 'assets/translations',
+      path: AssetManger.translations,
       supportedLocales: const [Locale('en')],
       fallbackLocale: const Locale('en'),
       child: const MyApp()));
