@@ -2,7 +2,7 @@ import 'package:eleverdev/ui/screens/authentication/authentication.dart';
 import 'package:eleverdev/ui/screens/error/error_screen.dart';
 import 'package:eleverdev/ui/screens/home_screen/home_screen.dart';
 import 'package:eleverdev/ui/screens/screen1/screen1.dart';
-import 'package:flutter/material.dart';
+
 import 'package:get/route_manager.dart';
 
 class Routes {

@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:eleverdev/controllers/home_page.dart';
 import 'package:eleverdev/data/extentions/extentions.dart';
 import 'package:eleverdev/helpers/font_weight.dart';
 import 'package:flutter/material.dart';
@@ -93,6 +94,17 @@ class CardModel {
         Get.toNamed(onPressData['onPress']);
         return;
       case 'function':
+        onPressFunction(onPressData['onPress']);
+        return;
+      default:
+        return;
+    }
+  }
+
+  static onPressFunction(String functionName) {
+    switch (functionName) {
+      case "showSnackBar":
+        HomePageController().showGetSnackBar();
         return;
       default:
         return;

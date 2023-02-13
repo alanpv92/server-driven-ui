@@ -1,4 +1,4 @@
-
+import 'dart:developer';
 
 import 'package:eleverdev/controllers/authentication.dart';
 import 'package:eleverdev/controllers/home_page.dart';
@@ -44,7 +44,8 @@ class HomeScreen extends StatelessWidget {
                 ),
               );
             }
-            homeScreenController.populateListView(snapshot.data!.docs);
+            
+            homeScreenController.populateListView(snapshot.data!.docs,);
             return HomeScreenListView(
               key: UniqueKey(),
             );

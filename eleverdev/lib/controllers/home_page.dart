@@ -1,11 +1,11 @@
-
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eleverdev/controllers/base.dart';
 
 import 'package:eleverdev/data/models/card_model.dart';
 import 'package:eleverdev/mangers/firebase.dart';
 import 'package:eleverdev/services/firebase/firebase_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 
 /*
 This class contains all the functions required for home page of this application
@@ -36,5 +36,9 @@ class HomePageController extends BaseController {
       cards.add(cardModel);
       cards.sort((a, b) => a.position.compareTo(b.position));
     }
+  }
+
+  showGetSnackBar() {
+    Get.snackbar('u clicked card', '',snackPosition: SnackPosition.BOTTOM,colorText:Colors.white,backgroundColor: Colors.black);
   }
 }
