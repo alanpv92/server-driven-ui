@@ -1,7 +1,7 @@
-
 import 'package:eleverdev/data/extentions/extentions.dart';
 import 'package:eleverdev/helpers/font_weight.dart';
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 
 class CardModel {
   final int position;
@@ -26,6 +26,7 @@ class CardModel {
     final String? imageUrl = elementData['imageUrl'];
     final double? imageCons =
         double.tryParse(elementData['imageCons'].toString());
+
     final Widget widget = Visibility(
         visible: visibility,
         child: Card(
@@ -35,43 +36,63 @@ class CardModel {
                   bottomRight: Radius.circular(20)),
               borderSide: BorderSide.none),
           color: bgColor,
-          child: Column(
-            children: [
-              text != null
-                  ? ListTile(
-                      title: Text(
-                      text,
-                      style: TextStyle(
-                        color: textColor,
-                        fontSize: fontSize,
-                        fontWeight: fontWeight,
-                      ),
-                    ))
-                  : const SizedBox(),
-              imageUrl != null
-                  ? Container(
-                      width: double.infinity,
-                      height: 200,
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(20),
-                            bottomRight: Radius.circular(20)),
-                      ),
-                      margin: EdgeInsets.only(top: imageCons ?? 0.0),
-                      child: ClipRRect(
-                        borderRadius: const BorderRadius.only(
-                            bottomLeft: Radius.circular(20),
-                            bottomRight: Radius.circular(20)),
-                        child: Image.network(
-                          imageUrl,
-                          fit: BoxFit.cover,
+          child: InkWell(
+            onTap: () {
+              onpressAction(onPressData: elementData['onTap']);
+            },
+            child: Column(
+              children: [
+                text != null
+                    ? ListTile(
+                        title: Text(
+                        text,
+                        style: TextStyle(
+                          color: textColor,
+                          fontSize: fontSize,
+                          fontWeight: fontWeight,
                         ),
                       ))
-                  : const SizedBox(),
-            ],
+                    : const SizedBox(),
+                imageUrl != null
+                    ? Container(
+                        width: double.infinity,
+                        height: 200,
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(20),
+                              bottomRight: Radius.circular(20)),
+                        ),
+                        margin: EdgeInsets.only(top: imageCons ?? 0.0),
+                        child: ClipRRect(
+                          borderRadius: const BorderRadius.only(
+                              bottomLeft: Radius.circular(20),
+                              bottomRight: Radius.circular(20)),
+                          child: Image.network(
+                            imageUrl,
+                            fit: BoxFit.cover,
+                          ),
+                        ))
+                    : const SizedBox(),
+              ],
+            ),
           ),
         ));
 
     return CardModel._(position: elementData['pos'] ?? -1, widget: widget);
+  }
+
+  static onpressAction({required Map<String, dynamic>? onPressData}) {
+    if (onPressData == null || onPressData['type'] == null) {
+      return;
+    }
+    switch (onPressData['type']) {
+      case 'route':
+        Get.toNamed(onPressData['onPress']);
+        return;
+      case 'function':
+        return;
+      default:
+        return;
+    }
   }
 }

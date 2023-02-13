@@ -11,6 +11,7 @@ class ErrorScreen extends StatelessWidget {
       body: SafeArea(
           child: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(TextManger.instance.errorScreenContent),
             ElevatedButton(

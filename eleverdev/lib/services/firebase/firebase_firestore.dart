@@ -36,7 +36,11 @@ class FirebaseFireStoreService {
       "imageUrl": "https://source.unsplash.com/random",
       "imageCons": 20,
       "bgColor": "#070200",
-      "visibility": true
+      "visibility": true,
+      "onTap":{
+        "type":"route",
+         "onPress":'/screen-1',
+      }
     };
 
     final card2 = <String, dynamic>{
@@ -46,7 +50,11 @@ class FirebaseFireStoreService {
       "imageUrl": "https://source.unsplash.com/random",
       "imageCons": 20,
       "bgColor": "#FFFFFF",
-      "visibility": true
+      "visibility": true,
+      "onTap":{
+        "type":"function",
+        "onPress":"removeCard",
+      }
     };
 
     final card3 = <String, dynamic>{
@@ -56,7 +64,11 @@ class FirebaseFireStoreService {
       "imageUrl": "https://source.unsplash.com/random",
       "imageCons": 20,
       "bgColor": "#ED9728",
-      "visibility": true
+      "visibility": true,
+       "onTap":{
+        "type":"null",
+        "onPress":"",
+      }
     };
     cardConfig.add(card1);
     cardConfig.add(card2);

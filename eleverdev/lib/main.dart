@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:eleverdev/controllers/authentication.dart';
 import 'package:eleverdev/controllers/home_page.dart';
 import 'package:eleverdev/firebase_options.dart';
+import 'package:eleverdev/mangers/routes.dart';
 import 'package:eleverdev/mangers/theme.dart';
 import 'package:eleverdev/ui/screens/authentication/authentication.dart';
 import 'package:eleverdev/ui/screens/home_screen/home_screen.dart';
@@ -15,7 +16,6 @@ void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await EasyLocalization.ensureInitialized();
-
 
   runApp(EasyLocalization(
       path: 'assets/translations',
@@ -38,11 +38,11 @@ class MyApp extends StatelessWidget {
         )
       ],
       child: GetMaterialApp(
-      
           debugShowCheckedModeBanner: false,
           supportedLocales: context.supportedLocales,
           localizationsDelegates: context.localizationDelegates,
           locale: context.locale,
+          onUnknownRoute: RouteManger.getUnknownRoute,
           theme: ThemeManger.instance.getApplicationTheme,
           home: const AuthManger()),
     );
