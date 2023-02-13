@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eleverdev/controllers/home_page.dart';
 import 'package:eleverdev/data/extentions/extentions.dart';
 import 'package:eleverdev/helpers/font_weight.dart';
@@ -70,9 +71,14 @@ class CardModel {
                           borderRadius: const BorderRadius.only(
                               bottomLeft: Radius.circular(20),
                               bottomRight: Radius.circular(20)),
-                          child: Image.network(
-                            imageUrl,
+                          child: CachedNetworkImage(
+                            imageUrl: imageUrl,
+                            width: double.infinity,
                             fit: BoxFit.cover,
+                            placeholder: (context, url) =>
+                              const  Center(child:  CircularProgressIndicator()),
+                            errorWidget: (context, url, error) =>
+                                const Icon(Icons.error),
                           ),
                         ))
                     : const SizedBox(),
