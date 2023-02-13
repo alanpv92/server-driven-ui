@@ -1,3 +1,3 @@
 class FirebaseManger {
-  static String cardConfigCollection = 'cardConfig';
+  static String cardConfigCollection = 'cardConfigData';
 }

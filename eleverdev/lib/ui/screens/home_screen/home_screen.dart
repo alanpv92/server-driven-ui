@@ -1,9 +1,9 @@
-import 'dart:developer';
+
 
 import 'package:eleverdev/controllers/authentication.dart';
 import 'package:eleverdev/controllers/home_page.dart';
 import 'package:eleverdev/mangers/text.dart';
-import 'package:eleverdev/services/firebase/firebase_firestore.dart';
+
 import 'package:eleverdev/ui/widgets/home/home_screen_list_view.dart';
 
 import 'package:flutter/material.dart';

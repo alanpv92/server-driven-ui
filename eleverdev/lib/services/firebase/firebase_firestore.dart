@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eleverdev/mangers/firebase.dart';
 
+
 /*
 This class will contain all firestore methods required for this application
 */
