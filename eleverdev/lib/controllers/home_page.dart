@@ -24,6 +24,11 @@ class HomePageController extends BaseController {
   final List<CardModel> cards = [];
 
   void populateListView(List<DocumentSnapshot> data) {
+    /* 
+
+    function to populate card data according to firebase configrations
+
+    */
     cards.clear();
     for (var element in data) {
       final elementData = element.data() as Map<String, dynamic>;

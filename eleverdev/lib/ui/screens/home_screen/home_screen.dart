@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:eleverdev/controllers/authentication.dart';
 import 'package:eleverdev/controllers/home_page.dart';
 import 'package:eleverdev/mangers/text.dart';
+import 'package:eleverdev/services/firebase/firebase_firestore.dart';
 import 'package:eleverdev/ui/widgets/home/home_screen_list_view.dart';
 
 import 'package:flutter/material.dart';
@@ -18,6 +19,14 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(TextManger.instance.appBarTitle),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Provider.of<AuthenticationController>(context, listen: false)
+                    .onlogOut();
+              },
+              icon: const Icon(Icons.exit_to_app))
+        ],
       ),
       body: StreamBuilder(
         stream: homeScreenController.getSnapShot(),
@@ -28,8 +37,15 @@ class HomeScreen extends StatelessWidget {
             );
           } else if (snapshot.connectionState == ConnectionState.active &&
               snapshot.hasData) {
+            if (snapshot.data!.docs.isEmpty) {
+              return Scaffold(
+                body: Center(
+                  child: Text(TextManger.instance.noData),
+                ),
+              );
+            }
             homeScreenController.populateListView(snapshot.data!.docs);
-            return  HomeScreenListView(
+            return HomeScreenListView(
               key: UniqueKey(),
             );
           }
