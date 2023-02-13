@@ -22,6 +22,11 @@ class HomeScreen extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {
+                /*
+               
+                This function is used to logout user
+                  
+                */ 
                 Provider.of<AuthenticationController>(context, listen: false)
                     .onlogOut();
               },

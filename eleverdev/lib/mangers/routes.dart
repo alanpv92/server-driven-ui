@@ -2,6 +2,7 @@ import 'package:eleverdev/ui/screens/authentication/authentication.dart';
 import 'package:eleverdev/ui/screens/error/error_screen.dart';
 import 'package:eleverdev/ui/screens/home_screen/home_screen.dart';
 import 'package:eleverdev/ui/screens/screen1/screen1.dart';
+import 'package:eleverdev/ui/screens/screen2/screen2.dart';
 
 import 'package:get/route_manager.dart';
 
@@ -29,6 +30,7 @@ class RouteManger {
           name: Routes.homeScreenRoute,
           page: () => const HomeScreen(),
         ),
-        GetPage(name: Routes.page1, page: () => const Screen1())
+        GetPage(name: Routes.page1, page: () => const Screen1()),
+         GetPage(name: Routes.page2, page: () => const Screen2())
       ];
 }

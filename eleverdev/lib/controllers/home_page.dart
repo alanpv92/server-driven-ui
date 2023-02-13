@@ -39,6 +39,13 @@ class HomePageController extends BaseController {
   }
 
   showGetSnackBar() {
-    Get.snackbar('u clicked card', '',snackPosition: SnackPosition.BOTTOM,colorText:Colors.white,backgroundColor: Colors.black);
+    /*
+     This function shows an snackbar when called
+
+    */
+    Get.snackbar('u clicked card', '',
+        snackPosition: SnackPosition.BOTTOM,
+        colorText: Colors.white,
+        backgroundColor: Colors.black);
   }
 }

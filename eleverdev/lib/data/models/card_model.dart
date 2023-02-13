@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eleverdev/controllers/home_page.dart';
@@ -91,10 +91,12 @@ class CardModel {
   }
 
   static onpressAction({required Map<String, dynamic>? onPressData}) {
+    /*
+    This function is used to filter different onpress types and perform specific tasks according to that type
+    */
     if (onPressData == null || onPressData['type'] == null) {
       return;
     }
-    log(onPressData.toString());
     switch (onPressData['type']) {
       case 'route':
         Get.toNamed(onPressData['onPress']);
@@ -108,6 +110,11 @@ class CardModel {
   }
 
   static onPressFunction(String functionName) {
+    /*
+
+     This function is used call different functions based on function name
+
+    */
     switch (functionName) {
       case "showSnackBar":
         HomePageController().showGetSnackBar();
