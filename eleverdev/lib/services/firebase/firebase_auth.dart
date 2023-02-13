@@ -8,6 +8,13 @@ class FirebaseAuthService {
 
   Future<FirebaseResponse> createAccount(
       {required String email, required String password}) async {
+     /*
+
+      this funtions creates an account in firebase with email and password
+      if any error is thrown then status of FirebaseRespone will false with corresponding error message
+      else FirebaseResponse with status true is returned
+
+     */   
     try {
       final UserCredential userCredential = await _firebaseAuth
           .createUserWithEmailAndPassword(email: email, password: password);
@@ -36,7 +43,15 @@ class FirebaseAuthService {
 
   Future<FirebaseResponse> loginUser(
       {required String email, required String password}) async {
+       /*
+
+      this funtions login an user to firebase with email and password
+      if any error is thrown then status of FirebaseRespone will false with corresponding error message
+      else FirebaseResponse with status true is returned
+
+     */ 
     try {
+
       final UserCredential userCredential = await _firebaseAuth
           .signInWithEmailAndPassword(email: email, password: password);
       log(userCredential.user.toString());
