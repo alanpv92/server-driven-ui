@@ -21,7 +21,8 @@ class HomePageController extends BaseController {
     return snap;
   } // function returns an stream for collection cardConfigCollection
 
-  final List<CardModel> cards = [];
+  final List<CardModel> cards = []; 
+
 
   void populateListView(List<DocumentSnapshot> data) {
     /* 

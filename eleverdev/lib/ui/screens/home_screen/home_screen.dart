@@ -49,7 +49,6 @@ class HomeScreen extends StatelessWidget {
                 ),
               );
             }
-            
             homeScreenController.populateListView(snapshot.data!.docs,);
             return HomeScreenListView(
               key: UniqueKey(),

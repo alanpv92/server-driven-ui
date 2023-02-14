@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 extension HexColor on Color {
-  static Color? fromHex(String hexColorString) {
+  static Color? fromHex(String? hexColorString) {
+    if (hexColorString == null) {
+      return null;
+    }
     hexColorString = hexColorString.replaceAll("#", '');
     if (hexColorString.length == 6) {
       hexColorString = "FF$hexColorString";

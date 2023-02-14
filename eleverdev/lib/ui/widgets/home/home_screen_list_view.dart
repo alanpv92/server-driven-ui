@@ -12,7 +12,7 @@ class HomeScreenListView extends StatelessWidget {
     return ListView.builder(
       itemBuilder: (context, index) {
         return HomeScreenListItem(
-          homeScreenItem: homePageControllerProvider.cards[index].widget,
+          cardConfig: homePageControllerProvider.cards[index].cardConfig,
         );
       },
       itemCount: homePageControllerProvider.cards.length,
