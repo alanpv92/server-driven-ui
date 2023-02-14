@@ -15,6 +15,8 @@ CardConfig _$CardConfigFromJson(Map<String, dynamic> json) => CardConfig(
       onTap: json['onTap'] == null
           ? null
           : CardOnPress.fromJson(json['onTap'] as Map<String, dynamic>),
+      imageCons:
+          CardImageCons.fromJson(json['imageCons'] as Map<String, dynamic>),
       visibility: json['visibility'] as bool?,
     );
 
@@ -23,6 +25,7 @@ Map<String, dynamic> _$CardConfigToJson(CardConfig instance) =>
       'text': instance.text,
       'bgColor': instance.bgColor,
       'textStyle': instance.textStyle?.toJson(),
+      'imageCons': instance.imageCons.toJson(),
       'onTap': instance.onTap?.toJson(),
       'visibility': instance.visibility,
     };
@@ -50,4 +53,18 @@ Map<String, dynamic> _$CardOnPressToJson(CardOnPress instance) =>
     <String, dynamic>{
       'type': instance.type,
       'onPress': instance.onPress,
+    };
+
+CardImageCons _$CardImageConsFromJson(Map<String, dynamic> json) =>
+    CardImageCons(
+      alignment: json['alignment'] as String?,
+      height: json['height'] as int?,
+      width: json['width'] as int?,
+    );
+
+Map<String, dynamic> _$CardImageConsToJson(CardImageCons instance) =>
+    <String, dynamic>{
+      'height': instance.height,
+      'width': instance.width,
+      'alignment': instance.alignment,
     };

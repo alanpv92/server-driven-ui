@@ -25,9 +25,9 @@ class HomeScreenListItem extends StatelessWidget {
                 child: CachedNetworkImage(
                   fit: BoxFit.scaleDown,
                   imageUrl: 'https://source.unsplash.com/random',
-                  height: 50,
-                  width: 50,
-                  alignment: Alignment.topCenter,
+                  height: cardConfig.imageCons.getHeight,
+                  width: cardConfig.imageCons.getWidth,
+                  alignment:cardConfig.imageCons.getAlignment??Alignment.center,
                 ),
               )
             ],

@@ -1,3 +1,5 @@
+
+
 import 'package:eleverdev/controllers/home_page.dart';
 import 'package:eleverdev/data/models/card_config.dart';
 import 'package:get/route_manager.dart';
@@ -6,10 +8,10 @@ class CardModel {
   final int position;
   final CardConfig cardConfig;
 
-  CardModel._(
-      {required this.position,required this.cardConfig});
+  CardModel._({required this.position, required this.cardConfig});
 
   factory CardModel({required Map<String, dynamic> elementData}) {
+   
     // final String? text = elementData['text'];
     // final Color? bgColor = HexColor.fromHex(elementData['bgColor']);
     // final Color? textColor = elementData['textStyle'] != null

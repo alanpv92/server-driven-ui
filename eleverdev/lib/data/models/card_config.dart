@@ -1,4 +1,5 @@
 import 'package:eleverdev/data/extentions/extentions.dart';
+import 'package:eleverdev/helpers/alignment._helper.dart';
 import 'package:eleverdev/helpers/font_weight.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -10,6 +11,7 @@ class CardConfig {
   final String? text;
   final String? bgColor;
   final CardTextStyle? textStyle;
+  final CardImageCons imageCons;
   final CardOnPress? onTap;
   final bool? visibility;
   CardConfig(
@@ -17,6 +19,7 @@ class CardConfig {
       required this.textStyle,
       required this.text,
       required this.onTap,
+      required this.imageCons,
       required this.visibility});
   factory CardConfig.fromJson(Map<String, dynamic> json) =>
       _$CardConfigFromJson(json);
@@ -59,4 +62,11 @@ class CardImageCons {
   factory CardImageCons.fromJson(Map<String, dynamic> json) =>
       _$CardImageConsFromJson(json);
   Map<String, dynamic> toJson() => _$CardImageConsToJson(this);
+
+  double? get getHeight =>
+      height == null ? null : double.parse(height.toString());
+  double? get getWidth => width == null ? null : double.parse(width.toString());
+
+  Alignment? get getAlignment =>
+      AlignmentHelper.getAlignMent(alignment: alignment);
 }
