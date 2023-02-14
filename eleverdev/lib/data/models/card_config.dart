@@ -1,6 +1,9 @@
+
+
 import 'package:eleverdev/data/extentions/extentions.dart';
 import 'package:eleverdev/helpers/alignment._helper.dart';
 import 'package:eleverdev/helpers/font_weight.dart';
+import 'package:eleverdev/helpers/onpress_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -50,6 +53,10 @@ class CardOnPress {
   factory CardOnPress.fromJson(Map<String, dynamic> json) =>
       _$CardOnPressFromJson(json);
   Map<String, dynamic> toJson() => _$CardOnPressToJson(this);
+  void action() {
+   
+    OnPressHelper.getOnPressAction(onPress: onPress, type: type);
+  }
 }
 
 @JsonSerializable()
