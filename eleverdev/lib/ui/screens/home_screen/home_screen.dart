@@ -1,5 +1,3 @@
-
-
 import 'package:eleverdev/controllers/authentication.dart';
 import 'package:eleverdev/controllers/home_page.dart';
 import 'package:eleverdev/mangers/text.dart';
@@ -26,7 +24,7 @@ class HomeScreen extends StatelessWidget {
                
                 This function is used to logout user
                   
-                */ 
+                */
                 Provider.of<AuthenticationController>(context, listen: false)
                     .onlogOut();
               },
@@ -49,10 +47,20 @@ class HomeScreen extends StatelessWidget {
                 ),
               );
             }
-            
-            homeScreenController.populateListView(snapshot.data!.docs,);
-            return HomeScreenListView(
-              key: UniqueKey(),
+            return FutureBuilder(
+              future: homeScreenController.populateListView(
+                snapshot.data!.docs,
+              ),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  return HomeScreenListView(
+                    key: UniqueKey(),
+                  );
+                }
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              },
             );
           }
           return const Center(child: CircularProgressIndicator());

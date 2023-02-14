@@ -17,7 +17,6 @@ void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await EasyLocalization.ensureInitialized();
-
   runApp(EasyLocalization(
       path: AssetManger.translations,
       supportedLocales: const [Locale('en')],
@@ -44,7 +43,7 @@ class MyApp extends StatelessWidget {
           localizationsDelegates: context.localizationDelegates,
           locale: context.locale,
           getPages: RouteManger.getRoutes(),
-          unknownRoute:RouteManger.getErrorPage() ,
+          unknownRoute: RouteManger.getErrorPage(),
           theme: ThemeManger.instance.getApplicationTheme,
           home: const AuthManger()),
     );
