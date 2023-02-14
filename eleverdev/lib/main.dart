@@ -5,7 +5,6 @@ import 'package:eleverdev/firebase_options.dart';
 import 'package:eleverdev/mangers/asset.dart';
 import 'package:eleverdev/mangers/routes.dart';
 import 'package:eleverdev/mangers/theme.dart';
-
 import 'package:eleverdev/ui/screens/authentication/authentication.dart';
 import 'package:eleverdev/ui/screens/home_screen/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -18,7 +17,6 @@ void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await EasyLocalization.ensureInitialized();
-
   runApp(EasyLocalization(
       path: AssetManger.translations,
       supportedLocales: const [Locale('en')],

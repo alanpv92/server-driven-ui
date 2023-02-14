@@ -1,8 +1,7 @@
 
 
-import 'package:eleverdev/controllers/home_page.dart';
 import 'package:eleverdev/data/models/card_config.dart';
-import 'package:get/route_manager.dart';
+
 
 class CardModel {
   final int position;

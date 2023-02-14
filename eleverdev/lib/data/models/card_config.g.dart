@@ -15,8 +15,10 @@ CardConfig _$CardConfigFromJson(Map<String, dynamic> json) => CardConfig(
       onTap: json['onTap'] == null
           ? null
           : CardOnPress.fromJson(json['onTap'] as Map<String, dynamic>),
-      imageCons:
-          CardImageCons.fromJson(json['imageCons'] as Map<String, dynamic>),
+      imageCons: json['imageCons'] == null
+          ? null
+          : CardImageCons.fromJson(json['imageCons'] as Map<String, dynamic>),
+      imageUrl: json['imageUrl'] as String?,
       visibility: json['visibility'] as bool?,
     );
 
@@ -25,9 +27,10 @@ Map<String, dynamic> _$CardConfigToJson(CardConfig instance) =>
       'text': instance.text,
       'bgColor': instance.bgColor,
       'textStyle': instance.textStyle?.toJson(),
-      'imageCons': instance.imageCons.toJson(),
+      'imageCons': instance.imageCons?.toJson(),
       'onTap': instance.onTap?.toJson(),
       'visibility': instance.visibility,
+      'imageUrl': instance.imageUrl,
     };
 
 CardTextStyle _$CardTextStyleFromJson(Map<String, dynamic> json) =>

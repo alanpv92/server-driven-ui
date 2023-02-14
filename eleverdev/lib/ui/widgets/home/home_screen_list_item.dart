@@ -1,6 +1,7 @@
-import 'dart:developer';
+
 
 import 'package:cached_network_image/cached_network_image.dart';
+
 import 'package:eleverdev/data/extentions/extentions.dart';
 import 'package:eleverdev/data/models/card_config.dart';
 import 'package:flutter/material.dart';
@@ -28,18 +29,23 @@ class HomeScreenListItem extends StatelessWidget {
                       cardConfig.text!,
                       style: cardConfig.textStyle?.getCardTextStyle,
                     ),
-                  Align(
-                    alignment:
-                        cardConfig.imageCons.getAlignment ?? Alignment.center,
-                    child: CachedNetworkImage(
-                      fit: BoxFit.scaleDown,
-                      imageUrl: 'https://source.unsplash.com/random',
-                      height: cardConfig.imageCons.getHeight,
-                      width: cardConfig.imageCons.getWidth,
-                      alignment:
-                          cardConfig.imageCons.getAlignment ?? Alignment.center,
+                  if (cardConfig.imageUrl != null)
+                    Align(
+                      alignment: cardConfig.imageCons == null
+                          ? Alignment.center
+                          : cardConfig.imageCons!.getAlignment ??
+                              Alignment.center,
+                      child: CachedNetworkImage(
+                        fit: BoxFit.scaleDown,
+                        imageUrl: cardConfig.imageUrl!,
+                        height: cardConfig.imageCons?.getHeight,
+                        width: cardConfig.imageCons?.getWidth,
+                        placeholder: (context, url) =>
+                            const Center(child: CircularProgressIndicator()),
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
+                      ),
                     ),
-                  ),
                 ],
               ),
             )),

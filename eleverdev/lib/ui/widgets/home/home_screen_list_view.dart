@@ -1,3 +1,4 @@
+
 import 'package:eleverdev/controllers/home_page.dart';
 import 'package:eleverdev/ui/widgets/home/home_screen_list_item.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +9,8 @@ class HomeScreenListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final homePageControllerProvider = Provider.of<HomePageController>(context,listen: false);
+    final homePageControllerProvider =
+        Provider.of<HomePageController>(context, listen: false);
     return ListView.builder(
       itemBuilder: (context, index) {
         return HomeScreenListItem(

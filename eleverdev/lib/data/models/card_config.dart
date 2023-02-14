@@ -1,5 +1,3 @@
-
-
 import 'package:eleverdev/data/extentions/extentions.dart';
 import 'package:eleverdev/helpers/alignment._helper.dart';
 import 'package:eleverdev/helpers/font_weight.dart';
@@ -14,15 +12,17 @@ class CardConfig {
   final String? text;
   final String? bgColor;
   final CardTextStyle? textStyle;
-  final CardImageCons imageCons;
+  final CardImageCons? imageCons;
   final CardOnPress? onTap;
   final bool? visibility;
+  String? imageUrl;
   CardConfig(
       {required this.bgColor,
       required this.textStyle,
       required this.text,
       required this.onTap,
       required this.imageCons,
+      this.imageUrl,
       required this.visibility});
   factory CardConfig.fromJson(Map<String, dynamic> json) =>
       _$CardConfigFromJson(json);
@@ -54,7 +54,6 @@ class CardOnPress {
       _$CardOnPressFromJson(json);
   Map<String, dynamic> toJson() => _$CardOnPressToJson(this);
   void action() {
-   
     OnPressHelper.getOnPressAction(onPress: onPress, type: type);
   }
 }

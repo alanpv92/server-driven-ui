@@ -61,7 +61,7 @@ class FirebaseFireStoreService {
       "visibility": true,
       "onTap": {
         "type": "function",
-        "onPress": "removeCard",
+        "onPress": "showSnackBar",
       }
     };
 
@@ -81,8 +81,8 @@ class FirebaseFireStoreService {
         "onPress": "",
       }
     };
-    cardConfig.add(card1);
-    cardConfig.add(card2);
-    cardConfig.add(card3);
+    cardConfig.doc('card1').set(card1);
+    cardConfig.doc('card2').set(card2);
+    cardConfig.doc('card3').set(card3);
   }
 }
