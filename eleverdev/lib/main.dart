@@ -5,6 +5,7 @@ import 'package:eleverdev/firebase_options.dart';
 import 'package:eleverdev/mangers/asset.dart';
 import 'package:eleverdev/mangers/routes.dart';
 import 'package:eleverdev/mangers/theme.dart';
+
 import 'package:eleverdev/ui/screens/authentication/authentication.dart';
 import 'package:eleverdev/ui/screens/home_screen/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
           localizationsDelegates: context.localizationDelegates,
           locale: context.locale,
           getPages: RouteManger.getRoutes(),
-          unknownRoute:RouteManger.getErrorPage() ,
+          unknownRoute: RouteManger.getErrorPage(),
           theme: ThemeManger.instance.getApplicationTheme,
           home: const AuthManger()),
     );

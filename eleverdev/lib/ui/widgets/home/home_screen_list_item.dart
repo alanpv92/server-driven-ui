@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eleverdev/data/extentions/extentions.dart';
 import 'package:eleverdev/data/models/card_config.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,16 @@ class HomeScreenListItem extends StatelessWidget {
                   cardConfig.text!,
                   style: cardConfig.textStyle?.getCardTextStyle,
                 ),
-                
+              SizedBox(
+                width: double.infinity,
+                child: CachedNetworkImage(
+                  fit: BoxFit.scaleDown,
+                  imageUrl: 'https://source.unsplash.com/random',
+                  height: 50,
+                  width: 50,
+                  alignment: Alignment.topCenter,
+                ),
+              )
             ],
           )),
     );

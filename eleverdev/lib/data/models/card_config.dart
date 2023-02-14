@@ -48,3 +48,15 @@ class CardOnPress {
       _$CardOnPressFromJson(json);
   Map<String, dynamic> toJson() => _$CardOnPressToJson(this);
 }
+
+@JsonSerializable()
+class CardImageCons {
+  final int? height;
+  final int? width;
+  final String? alignment;
+  CardImageCons(
+      {required this.alignment, required this.height, required this.width});
+  factory CardImageCons.fromJson(Map<String, dynamic> json) =>
+      _$CardImageConsFromJson(json);
+  Map<String, dynamic> toJson() => _$CardImageConsToJson(this);
+}
