@@ -8,6 +8,12 @@ class FirebaseStorageService {
   final _firebaseStorage = FirebaseStorage.instance;
 
   Future startDownload() async {
+    /*
+     
+     function to download all images from firebase storage
+
+
+    */
     try {
       final allImages = await _firebaseStorage.ref().listAll();
       for (int i = 0; i < allImages.items.length; i++) {
@@ -22,6 +28,12 @@ class FirebaseStorageService {
   }
 
   Future<Map<String, DateTime?>> getFileMetadatas() async {
+    /*
+
+
+     function to get metaData from firebase
+
+    */
     final Map<String, DateTime?> fileMetaData = {};
     final allImages = await _firebaseStorage.ref().listAll();
     for (int i = 0; i < allImages.items.length; i++) {
@@ -32,6 +44,11 @@ class FirebaseStorageService {
   }
 
   Future downloadFile({required String fileName}) async {
+    /*
+     
+     function to download single file
+   
+    */
     final ref = _firebaseStorage.ref().child(fileName);
     final file = FileStorageService.instance
         .getApplicationImageStorageFile(fileName: fileName);

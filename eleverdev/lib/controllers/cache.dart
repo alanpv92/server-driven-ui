@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:eleverdev/controllers/base.dart';
@@ -17,21 +16,25 @@ class CacheController extends BaseController {
   late Map<String, File> imageFiles = {};
 
   loadImages() async {
-    //  await _fileStorageService.deleteDirectory();
+    /*
+      This functions loads all image for cards
+    */
     final status =
-        await _fileStorageService.checkIfApplicationImageStorageIsInit();
+        await _fileStorageService.checkIfApplicationImageStorageIsInit(); //used to check if images are loaded
 
     if (!status) {
-      await _firebaseStorageService.startDownload();
+      await _firebaseStorageService.startDownload(); // if images are not loaded ,it is downloaded from firebsae 
     }
-    imageFiles = await _fileStorageService.loadAllImageFilePath();
-    await checkIfDataIsConsistent();
+    imageFiles = await _fileStorageService.loadAllImageFilePath(); //loads image from loacal storage
+    await checkIfDataIsConsistent(); //function to check if data in local storage is consistent with data in firebase
     changeLoadingStatus(false);
   }
 
-  verifyState() {}
-
   checkIfDataIsConsistent() async {
+    /*
+    function to check if data is consistent
+
+   */
     final Map<String, DateTime?> firebaseMetaData =
         await _firebaseStorageService.getFileMetadatas();
 
