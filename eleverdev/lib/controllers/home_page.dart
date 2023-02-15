@@ -1,11 +1,10 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eleverdev/controllers/base.dart';
 
 import 'package:eleverdev/data/models/card_model.dart';
 import 'package:eleverdev/mangers/firebase.dart';
 import 'package:eleverdev/services/firebase/firebase_firestore.dart';
-import 'package:eleverdev/services/firebase/firebase_storage.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 
@@ -17,8 +16,6 @@ class HomePageController extends BaseController {
   final FirebaseFireStoreService _firebaseFireStoreService =
       FirebaseFireStoreService(); //creates an instance of firebse service
 
-  final FirebaseStorageService _firebaseStorageService =
-      FirebaseStorageService();
 
   Stream<QuerySnapshot<Map<String, dynamic>>> getSnapShot() {
     final snap = _firebaseFireStoreService.getCollectionQuerySnapShot(
@@ -28,7 +25,7 @@ class HomePageController extends BaseController {
 
   final List<CardModel> cards = [];
 
-  Future populateListView(List<DocumentSnapshot> data) async {
+  void populateListView(List<DocumentSnapshot> data) {
     /* 
 
     function to populate card data according to firebase configrations
@@ -38,12 +35,7 @@ class HomePageController extends BaseController {
     cards.clear();
     for (var element in data) {
       final elementData = element.data() as Map<String, dynamic>;
-      final cardModel = CardModel(elementData: elementData);
-      final response =
-          await _firebaseStorageService.getImageById(id: element.id);
-      if (response.status) {
-        cardModel.cardConfig.imageUrl = response.data;
-      }
+      final cardModel = CardModel(elementData: elementData, id: element.id);
       cards.add(cardModel);
       cards.sort((a, b) => a.position.compareTo(b.position));
     }

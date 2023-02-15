@@ -1,14 +1,14 @@
-
-
 import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:eleverdev/data/extentions/extentions.dart';
 import 'package:eleverdev/data/models/card_config.dart';
+import 'package:eleverdev/helpers/firebase.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreenListItem extends StatelessWidget {
   final CardConfig cardConfig;
-  const HomeScreenListItem({super.key, required this.cardConfig});
+  final String id;
+  const HomeScreenListItem({super.key, required this.cardConfig,required this.id});
 
   @override
   Widget build(BuildContext context) {
@@ -29,23 +29,22 @@ class HomeScreenListItem extends StatelessWidget {
                       cardConfig.text!,
                       style: cardConfig.textStyle?.getCardTextStyle,
                     ),
-                  if (cardConfig.imageUrl != null)
-                    Align(
-                      alignment: cardConfig.imageCons == null
-                          ? Alignment.center
-                          : cardConfig.imageCons!.getAlignment ??
-                              Alignment.center,
-                      child: CachedNetworkImage(
-                        fit: BoxFit.scaleDown,
-                        imageUrl: cardConfig.imageUrl!,
-                        height: cardConfig.imageCons?.getHeight,
-                        width: cardConfig.imageCons?.getWidth,
-                        placeholder: (context, url) =>
-                            const Center(child: CircularProgressIndicator()),
-                        errorWidget: (context, url, error) =>
-                            const Icon(Icons.error),
-                      ),
+                  Align(
+                    alignment: cardConfig.imageCons == null
+                        ? Alignment.center
+                        : cardConfig.imageCons!.getAlignment ??
+                            Alignment.center,
+                    child: CachedNetworkImage(
+                      fit: BoxFit.scaleDown,
+                      imageUrl: FirebaseHelper.getImagePath(id:id),
+                      height: cardConfig.imageCons?.getHeight,
+                      width: cardConfig.imageCons?.getWidth,
+                      placeholder: (context, url) =>
+                          const Center(child: CircularProgressIndicator()),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
                     ),
+                  ),
                 ],
               ),
             )),

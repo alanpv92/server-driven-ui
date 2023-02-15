@@ -1,3 +1,4 @@
+import 'dart:developer';
 
 import 'package:eleverdev/controllers/home_page.dart';
 import 'package:eleverdev/ui/widgets/home/home_screen_list_item.dart';
@@ -15,6 +16,7 @@ class HomeScreenListView extends StatelessWidget {
       itemBuilder: (context, index) {
         return HomeScreenListItem(
           cardConfig: homePageControllerProvider.cards[index].cardConfig,
+          id:homePageControllerProvider.cards[index].id ,
         );
       },
       itemCount: homePageControllerProvider.cards.length,

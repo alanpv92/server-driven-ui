@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:eleverdev/controllers/authentication.dart';
 import 'package:eleverdev/controllers/home_page.dart';
 import 'package:eleverdev/mangers/text.dart';
@@ -47,20 +49,9 @@ class HomeScreen extends StatelessWidget {
                 ),
               );
             }
-            return FutureBuilder(
-              future: homeScreenController.populateListView(
-                snapshot.data!.docs,
-              ),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.done) {
-                  return HomeScreenListView(
-                    key: UniqueKey(),
-                  );
-                }
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              },
+            homeScreenController.populateListView(snapshot.data!.docs);
+            return HomeScreenListView(
+              key: UniqueKey(),
             );
           }
           return const Center(child: CircularProgressIndicator());
