@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:eleverdev/controllers/authentication.dart';
+import 'package:eleverdev/controllers/cache.dart';
 import 'package:eleverdev/controllers/home_page.dart';
 import 'package:eleverdev/firebase_options.dart';
 import 'package:eleverdev/mangers/asset.dart';
@@ -25,6 +26,7 @@ void main(List<String> args) async {
   // FileStorageService.instance
   //     .checkIfApplicationImageStorageIsInit()
   //     .toString();
+  FileStorageService.instance.loadAllImageFilePath();
   // FirebaseStorageService().startDownload();
   runApp(EasyLocalization(
       path: AssetManger.translations,
@@ -44,7 +46,8 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => HomePageController(),
-        )
+        ),
+        ChangeNotifierProvider(create: (context) => CacheController(),)
       ],
       child: GetMaterialApp(
           debugShowCheckedModeBanner: false,
