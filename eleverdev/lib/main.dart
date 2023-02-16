@@ -26,7 +26,7 @@ void main(List<String> args) async {
   // FileStorageService.instance
   //     .checkIfApplicationImageStorageIsInit()
   //     .toString();
-  FileStorageService.instance.loadAllImageFilePath();
+  // FileStorageService.instance.loadAllImageFilePath();
   // FirebaseStorageService().startDownload();
   runApp(EasyLocalization(
       path: AssetManger.translations,
@@ -47,7 +47,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => HomePageController(),
         ),
-        ChangeNotifierProvider(create: (context) => CacheController(),)
+        ChangeNotifierProvider(
+          create: (context) => CacheController(),
+        )
       ],
       child: GetMaterialApp(
           debugShowCheckedModeBanner: false,

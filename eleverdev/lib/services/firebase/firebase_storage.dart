@@ -22,7 +22,9 @@ class FirebaseStorageService {
         final downloadTask = allImages.items[i].writeToFile(file);
         await downloadTask;
       }
-    } catch (e) {
+    } 
+    
+    catch (e) {
       log(e.toString());
     }
   }
@@ -55,6 +57,4 @@ class FirebaseStorageService {
     final downloadTask = ref.writeToFile(file);
     await downloadTask;
   }
-
- 
 }

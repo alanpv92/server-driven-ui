@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:eleverdev/controllers/base.dart';
@@ -19,13 +20,15 @@ class CacheController extends BaseController {
     /*
       This functions loads all image for cards
     */
-    final status =
-        await _fileStorageService.checkIfApplicationImageStorageIsInit(); //used to check if images are loaded
-
+    final status = await _fileStorageService
+        .checkIfApplicationImageStorageIsInit(); //used to check if images are loaded
+    log('status is $status');
     if (!status) {
-      await _firebaseStorageService.startDownload(); // if images are not loaded ,it is downloaded from firebsae 
+      await _firebaseStorageService
+          .startDownload(); // if images are not loaded ,it is downloaded from firebsae
     }
-    imageFiles = await _fileStorageService.loadAllImageFilePath(); //loads image from loacal storage
+    imageFiles = await _fileStorageService
+        .loadAllImageFilePath(); //loads image from loacal storage
     await checkIfDataIsConsistent(); //function to check if data in local storage is consistent with data in firebase
     changeLoadingStatus(false);
   }

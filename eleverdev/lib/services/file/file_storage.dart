@@ -1,39 +1,63 @@
-import 'dart:developer';
+
 import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
 
 class FileStorageService {
-  late Directory _directory;
   FileStorageService._();
   static FileStorageService instance = FileStorageService._();
   factory FileStorageService() => instance;
 
+  late Directory _directory;
+  late String _dirPath;
+
   initFileStorageService() async {
+    /*
+     
+     function used to initialize directory and directory path when app starts
+
+    */
     _directory = await getApplicationDocumentsDirectory();
+    _dirPath = '${_directory.path}/images/';
   }
 
   File getApplicationImageStorageFile({required fileName}) {
+    /*
+     
+     function used to get file with given name
+
+    */
     final path = getApplicatonImageStoragePath(fileName: fileName);
+
     return File(path);
   }
 
   String getApplicatonImageStoragePath({required fileName}) {
-    return "${_directory.path}/images/$fileName";
+    /*
+    function to get path of file with given name;
+    */
+    return "$_dirPath$fileName";
   }
 
   Future<bool> checkIfApplicationImageStorageIsInit() async {
-    final path = "${_directory.path}/images";
-    final status = await Directory(path).exists();
+    /*
+     
+     function to check if image directory is present
+
+    */
+    final status = await Directory(_dirPath).exists();
 
     return status;
   }
 
   loadAllImageFilePath() async {
+    /*
+     
+     function used to load all files from image directory
+ 
+    */
     final Map<String, File> imageFiles = {};
-    final path = "${_directory.path}/images";
-    final Directory directory = Directory(path);
-
+    final Directory directory = Directory(_dirPath);
     final allFiles = directory.listSync();
     for (int i = 0; i < allFiles.length; i++) {
       final File file = File(allFiles[i].path);
@@ -44,9 +68,11 @@ class FileStorageService {
   }
 
   getFileMetaData() {
+    /*  
+     function used to get metadata of files in image directoy
+    */
     final Map<String, DateTime> imageFiles = {};
-    final path = "${_directory.path}/images";
-    final Directory directory = Directory(path);
+    final Directory directory = Directory(_dirPath);
     final files = directory.listSync();
     for (var element in files) {
       final DateTime modifed = element.statSync().modified;
@@ -55,15 +81,14 @@ class FileStorageService {
     return imageFiles;
   }
 
- File getFile({required String fileName})  {
-    final path = "${_directory.path}/images/$fileName";
+  File getFile({required String fileName}) {
+    /*
+     
+     function used to get a single file
+
+    */
+    final path = "$_dirPath$fileName";
     File file = File(path);
     return file;
   }
-
-  // Future deleteDirectory() async {
-  //   // final path = "${_directory.path}/images";
-  //   // final dir = Directory(path);
-  //   // await dir.delete(recursive: true);
-  // }
 }
