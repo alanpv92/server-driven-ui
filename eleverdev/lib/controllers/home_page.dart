@@ -13,9 +13,11 @@ This class contains all the functions required for home page of this application
 */
 
 class HomePageController extends BaseController {
+  HomePageController._();
+  static HomePageController instance = HomePageController._();
+  factory HomePageController() => instance;
   final FirebaseFireStoreService _firebaseFireStoreService =
       FirebaseFireStoreService(); //creates an instance of firebse service
-
 
   Stream<QuerySnapshot<Map<String, dynamic>>> getSnapShot() {
     final snap = _firebaseFireStoreService.getCollectionQuerySnapShot(
@@ -50,5 +52,10 @@ class HomePageController extends BaseController {
         snackPosition: SnackPosition.BOTTOM,
         colorText: Colors.white,
         backgroundColor: Colors.black);
+  }
+
+  homePageControllerDisposer() {
+    cards.clear();
+    isloading = false;
   }
 }

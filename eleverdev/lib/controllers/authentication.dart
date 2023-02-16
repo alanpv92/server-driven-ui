@@ -1,3 +1,4 @@
+import 'package:eleverdev/controllers/app.dart';
 import 'package:eleverdev/controllers/base.dart';
 import 'package:eleverdev/data/enum/enums.dart';
 import 'package:eleverdev/data/models/firebase_response.dart';
@@ -146,6 +147,7 @@ class AuthenticationController extends BaseController {
 
 
     */
+    AppController.instance.disposeApp();
     _firebaseAuthService.logout();
   }
 }

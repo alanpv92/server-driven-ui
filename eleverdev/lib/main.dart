@@ -12,6 +12,7 @@ import 'package:eleverdev/services/file/file_storage.dart';
 import 'package:eleverdev/services/firebase/firebase_storage.dart';
 import 'package:eleverdev/ui/screens/authentication/authentication.dart';
 import 'package:eleverdev/ui/screens/home_screen/home_screen.dart';
+import 'package:eleverdev/ui/screens/splash/splash.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -87,7 +88,7 @@ class AuthManger extends StatelessWidget {
           );
         }
         if (snapshot.hasData) {
-          return const HomeScreen();
+          return const SplashScreen();
         }
         return const AuthenticationScreen();
       },

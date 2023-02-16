@@ -13,6 +13,7 @@ class AuthTextManger {
 
 class CommonTextManger {
   final String appBarTitle = "Elever-Dev";
+  final String splashTitle = "Elever Dev";
   final String errorText = tr('show_tost_error');
   final String noData = tr('no_data');
   final String errorScreenContent = tr('error_page_content');

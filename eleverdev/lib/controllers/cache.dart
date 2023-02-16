@@ -51,4 +51,9 @@ class CacheController extends BaseController {
       }
     });
   }
+
+  cacheControllerDisposer() {
+    imageFiles = {};
+    isloading = false;
+  }
 }
