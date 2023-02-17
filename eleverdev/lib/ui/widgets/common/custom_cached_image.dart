@@ -16,8 +16,10 @@ class CustomCachedImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cachedControllerProvider = Provider.of<CacheController>(context);
+
     return cachedControllerProvider.isCache
         ? Image.file(
+            key: UniqueKey(),
             File(
                 "${cachedControllerProvider.imageBasePath}$id${AppManager.FirebaseStorageFormat}"),
             height: cardImageCons?.getHeight,
@@ -27,6 +29,7 @@ class CustomCachedImage extends StatelessWidget {
             },
           )
         : Image.network(
+            key: UniqueKey(),
             "${cachedControllerProvider.imageBasePath}$id${AppManager.FirebaseStorageFormat}?alt=media",
             height: cardImageCons?.getHeight,
             loadingBuilder: (context, child, loadingProgress) {

@@ -36,10 +36,12 @@ class FirebaseStorageService {
     */
     final Map<String, DateTime?> fileMetaData = {};
     final allImages = await _firebaseStorage.ref().listAll();
+
     for (int i = 0; i < allImages.items.length; i++) {
       final metaData = await allImages.items[i].getMetadata();
-      fileMetaData[allImages.items[0].name] = metaData.updated;
+      fileMetaData[allImages.items[i].name] = metaData.updated;
     }
+    
     return fileMetaData;
   }
 
@@ -53,7 +55,6 @@ class FirebaseStorageService {
     final file = FileStorageService.instance
         .getApplicationImageStorageFile(fileName: fileName);
     final downloadTask = ref.writeToFile(file);
-    log('i am being called');
     await downloadTask;
   }
 }

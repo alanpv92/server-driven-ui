@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:eleverdev/controllers/base.dart';
 import 'package:eleverdev/mangers/firebase.dart';
 import 'package:eleverdev/services/file/file_storage.dart';
@@ -35,25 +33,19 @@ class CacheController extends BaseController {
   }
 
   checkForConsistency() async {
-    bool shouldRebuild = false;
     final Map<String, DateTime?> firebaseMetaData =
         await _firebaseStorageService.getFileMetadatas();
     final Map<String, DateTime> fileMetaData =
         await _fileStorageService.getFileMetaData();
+
     firebaseMetaData.forEach((key, value) async {
       if (firebaseMetaData[key] != null &&
           fileMetaData[key] != null &&
           fileMetaData[key]!.isBefore(firebaseMetaData[key]!)) {
-        shouldRebuild = true;
         await _firebaseStorageService.downloadFile(fileName: key);
-        log('data downloaded-------------------');
-      } else {
-        log('data is correct');
+        notifyListeners();
       }
     });
-    if (shouldRebuild) {
-      notifyListeners();
-    }
   }
 
   cacheControllerDisposer() {}
