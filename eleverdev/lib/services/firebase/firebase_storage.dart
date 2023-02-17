@@ -1,7 +1,12 @@
 import 'dart:developer';
+import 'dart:isolate';
 
 // ignore: depend_on_referenced_packages
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:eleverdev/firebase_options.dart';
 import 'package:eleverdev/services/file/file_storage.dart';
+import 'package:firebase_core/firebase_core.dart';
+import "package:flutter_isolate/flutter_isolate.dart";
 import 'package:firebase_storage/firebase_storage.dart';
 
 class FirebaseStorageService {
@@ -56,5 +61,28 @@ class FirebaseStorageService {
         .getApplicationImageStorageFile(fileName: fileName);
     final downloadTask = ref.writeToFile(file);
     await downloadTask;
+  }
+
+  Future startDownloadUsingIsolate() async {
+    final revicePort = ReceivePort();
+    FlutterIsolate.spawn(startDownLoadProcess, revicePort.sendPort);
+  }
+}
+@pragma('vm:entry-point')
+startDownLoadProcess(SendPort sendPort) async {
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  final FirebaseStorage firebaseStorage = FirebaseStorage.instance;
+  final FileStorageService fileStorageService = FileStorageService();
+  await fileStorageService.initFileStorageService();
+  try {
+    final allImages = await firebaseStorage.ref().listAll();
+    for (int i = 0; i < allImages.items.length; i++) {
+      final file = FileStorageService.instance.getApplicationImageStorageFile(
+          fileName: allImages.items[i].fullPath);
+      final downloadTask = allImages.items[i].writeToFile(file);
+      await downloadTask;
+    }
+  } catch (e) {
+    log(e.toString());
   }
 }

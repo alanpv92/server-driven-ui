@@ -19,9 +19,10 @@ class CacheController extends BaseController {
         await _fileStorageService.checkIfApplicationImageStorageIsInit();
     isCache = status;
     if (!status) {
-      _firebaseStorageService.startDownload();
+      _firebaseStorageService.startDownloadUsingIsolate();
       imageBasePath = FirebaseManger.firebaseStorageBaseUrl;
     } else {
+  
       imageBasePath = _fileStorageService.getFileImageBasePath;
     }
   }

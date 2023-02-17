@@ -9,7 +9,7 @@ class FileStorageService {
   late Directory _directory;
   late String _dirPath;
 
-  initFileStorageService() async {
+  Future initFileStorageService() async {
     /*
      
      function used to initialize directory and directory path when app starts
