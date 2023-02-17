@@ -41,7 +41,7 @@ class FirebaseStorageService {
       final metaData = await allImages.items[i].getMetadata();
       fileMetaData[allImages.items[i].name] = metaData.updated;
     }
-    
+
     return fileMetaData;
   }
 

@@ -1,6 +1,4 @@
-import 'dart:developer';
 import 'dart:io';
-
 import 'package:path_provider/path_provider.dart';
 
 class FileStorageService {
@@ -21,7 +19,7 @@ class FileStorageService {
     _dirPath = '${_directory.path}/images/';
   }
 
-  String get getFileImageBasePath=>_dirPath;
+  String get getFileImageBasePath => _dirPath;
 
   File getApplicationImageStorageFile({required fileName}) {
     /*
@@ -48,7 +46,6 @@ class FileStorageService {
 
     */
     final status = await Directory(_dirPath).exists();
-
     return status;
   }
 

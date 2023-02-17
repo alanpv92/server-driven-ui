@@ -1,6 +1,4 @@
-import 'dart:developer';
 import 'dart:io';
-
 import 'package:eleverdev/controllers/cache.dart';
 import 'package:eleverdev/data/models/card_config.dart';
 import 'package:eleverdev/helpers/app.dart';
@@ -16,7 +14,6 @@ class CustomCachedImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cachedControllerProvider = Provider.of<CacheController>(context);
-
     return cachedControllerProvider.isCache
         ? Image.file(
             key: UniqueKey(),
