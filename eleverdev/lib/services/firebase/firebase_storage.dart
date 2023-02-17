@@ -22,9 +22,7 @@ class FirebaseStorageService {
         final downloadTask = allImages.items[i].writeToFile(file);
         await downloadTask;
       }
-    } 
-    
-    catch (e) {
+    } catch (e) {
       log(e.toString());
     }
   }
@@ -55,6 +53,7 @@ class FirebaseStorageService {
     final file = FileStorageService.instance
         .getApplicationImageStorageFile(fileName: fileName);
     final downloadTask = ref.writeToFile(file);
+    log('i am being called');
     await downloadTask;
   }
 }

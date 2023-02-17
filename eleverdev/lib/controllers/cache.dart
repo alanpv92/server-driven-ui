@@ -29,15 +29,16 @@ class CacheController extends BaseController {
     }
     imageFiles = await _fileStorageService
         .loadAllImageFilePath(); //loads image from loacal storage
-    await checkIfDataIsConsistent(); //function to check if data in local storage is consistent with data in firebase
+
+    // await checkIfDataIsConsistent(); //function to check if data in local storage is consistent with data in firebase
     changeLoadingStatus(false);
   }
 
   checkIfDataIsConsistent() async {
     /*
     function to check if data is consistent
-
-   */
+    */
+    bool shouldRebuild = false;
     final Map<String, DateTime?> firebaseMetaData =
         await _firebaseStorageService.getFileMetadatas();
 
@@ -46,10 +47,15 @@ class CacheController extends BaseController {
     imageFiles.forEach((key, value) async {
       if (firebaseMetaData[key] != null &&
           fileMetaData[key]!.isAtSameMomentAs(firebaseMetaData[key]!)) {
+        shouldRebuild = true;
         await _firebaseStorageService.downloadFile(fileName: key);
         imageFiles[key] = _fileStorageService.getFile(fileName: key);
       }
     });
+    log('i am being run');
+    if (shouldRebuild) {
+      notifyListeners();
+    }
   }
 
   cacheControllerDisposer() {

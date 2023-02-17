@@ -1,4 +1,4 @@
-
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
@@ -59,6 +59,7 @@ class FileStorageService {
     final Map<String, File> imageFiles = {};
     final Directory directory = Directory(_dirPath);
     final allFiles = directory.listSync();
+
     for (int i = 0; i < allFiles.length; i++) {
       final File file = File(allFiles[i].path);
       final String filename = file.path.split('/').last;

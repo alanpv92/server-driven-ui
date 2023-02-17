@@ -10,7 +10,8 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(child: FutureBuilder(
+      body: SafeArea(
+          child: FutureBuilder(
         future: AppController.instance.initApp(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {

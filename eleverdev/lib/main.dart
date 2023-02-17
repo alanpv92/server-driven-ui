@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:eleverdev/controllers/authentication.dart';
 import 'package:eleverdev/controllers/cache.dart';
@@ -9,9 +7,7 @@ import 'package:eleverdev/mangers/asset.dart';
 import 'package:eleverdev/mangers/routes.dart';
 import 'package:eleverdev/mangers/theme.dart';
 import 'package:eleverdev/services/file/file_storage.dart';
-import 'package:eleverdev/services/firebase/firebase_storage.dart';
 import 'package:eleverdev/ui/screens/authentication/authentication.dart';
-import 'package:eleverdev/ui/screens/home_screen/home_screen.dart';
 import 'package:eleverdev/ui/screens/splash/splash.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -19,16 +15,19 @@ import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:provider/provider.dart';
 
+/*
+
+1)check if image is present else show firebase url ,else file url
+2)check if contents in image directoy is not empty
+*/
+
+
+
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await EasyLocalization.ensureInitialized();
   await FileStorageService.instance.initFileStorageService();
-  // FileStorageService.instance
-  //     .checkIfApplicationImageStorageIsInit()
-  //     .toString();
-  // FileStorageService.instance.loadAllImageFilePath();
-  // FirebaseStorageService().startDownload();
   runApp(EasyLocalization(
       path: AssetManger.translations,
       supportedLocales: const [Locale('en')],
