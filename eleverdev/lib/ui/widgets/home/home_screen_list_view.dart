@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:eleverdev/controllers/cache.dart';
 import 'package:eleverdev/controllers/home_page.dart';
 import 'package:eleverdev/ui/widgets/home/home_screen_list_item.dart';
@@ -17,7 +15,7 @@ class _HomeScreenListViewState extends State<HomeScreenListView> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      CacheController.instance.checkIfDataIsConsistent();
+      CacheController.instance.performCacheAction();
     });
     super.initState();
   }

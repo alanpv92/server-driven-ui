@@ -21,6 +21,8 @@ class FileStorageService {
     _dirPath = '${_directory.path}/images/';
   }
 
+  String get getFileImageBasePath=>_dirPath;
+
   File getApplicationImageStorageFile({required fileName}) {
     /*
      
@@ -76,7 +78,7 @@ class FileStorageService {
     final Directory directory = Directory(_dirPath);
     final files = directory.listSync();
     for (var element in files) {
-      final DateTime modifed = element.statSync().modified;
+      final DateTime modifed = element.statSync().changed;
       imageFiles[element.path.split('/').last] = modifed;
     }
     return imageFiles;

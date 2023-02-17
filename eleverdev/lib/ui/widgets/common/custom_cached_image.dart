@@ -1,3 +1,6 @@
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:eleverdev/controllers/cache.dart';
 import 'package:eleverdev/data/models/card_config.dart';
 import 'package:eleverdev/helpers/app.dart';
@@ -13,21 +16,30 @@ class CustomCachedImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cachedControllerProvider = Provider.of<CacheController>(context);
-    return cachedControllerProvider.isloading
-        ? const Center(
-            child: CircularProgressIndicator(),
+    return cachedControllerProvider.isCache
+        ? Image.file(
+            File(
+                "${cachedControllerProvider.imageBasePath}$id${AppManager.FirebaseStorageFormat}"),
+            height: cardImageCons?.getHeight,
+            width: cardImageCons?.getWidth,
+            errorBuilder: (context, error, stackTrace) {
+              return const Icon(Icons.error);
+            },
           )
-        : cachedControllerProvider
-                    .imageFiles["$id${AppManager.FirebaseStorageFormat}"] ==
-                null
-            ? const Center(
-                child: Icon(Icons.error),
-              )
-            : Image.file(
-                cachedControllerProvider
-                    .imageFiles["$id${AppManager.FirebaseStorageFormat}"]!,
-                height: cardImageCons?.getHeight,
-                width: cardImageCons?.getWidth,
+        : Image.network(
+            "${cachedControllerProvider.imageBasePath}$id${AppManager.FirebaseStorageFormat}?alt=media",
+            height: cardImageCons?.getHeight,
+            loadingBuilder: (context, child, loadingProgress) {
+              if (loadingProgress == null) {
+                return child;
+              }
+              return const Center(
+                child: CircularProgressIndicator(),
               );
+            },
+            width: cardImageCons?.getWidth,
+            errorBuilder: (context, error, stackTrace) {
+              return const Icon(Icons.error);
+            });
   }
 }

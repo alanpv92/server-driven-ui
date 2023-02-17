@@ -37,16 +37,6 @@ class HomeScreenListItem extends StatelessWidget {
                             Alignment.center,
                     child: CustomCachedImage(
                         id: id, cardImageCons: cardConfig.imageCons),
-                    // child: CachedNetworkImage(
-                    //   fit: BoxFit.scaleDown,
-                    //   imageUrl: FirebaseHelper.getImagePath(id: id),
-                    //   height: cardConfig.imageCons?.getHeight,
-                    //   width: cardConfig.imageCons?.getWidth,
-                    //   placeholder: (context, url) =>
-                    //       const Center(child: CircularProgressIndicator()),
-                    //   errorWidget: (context, url, error) =>
-                    //       const Icon(Icons.error),
-                    // ),
                   ),
                 ],
               ),

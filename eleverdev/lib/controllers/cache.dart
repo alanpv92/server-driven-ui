@@ -1,65 +1,60 @@
 import 'dart:developer';
-import 'dart:io';
 
 import 'package:eleverdev/controllers/base.dart';
+import 'package:eleverdev/mangers/firebase.dart';
 import 'package:eleverdev/services/file/file_storage.dart';
 import 'package:eleverdev/services/firebase/firebase_storage.dart';
 
 class CacheController extends BaseController {
-  CacheController._() {
-    isloading = true;
-  }
+  CacheController._();
   static CacheController instance = CacheController._();
   factory CacheController() => instance;
   final FileStorageService _fileStorageService = FileStorageService();
   final FirebaseStorageService _firebaseStorageService =
       FirebaseStorageService();
-  late Map<String, File> imageFiles = {};
-
-  loadImages() async {
-    /*
-      This functions loads all image for cards
-    */
-    final status = await _fileStorageService
-        .checkIfApplicationImageStorageIsInit(); //used to check if images are loaded
-    log('status is $status');
+  late bool isCache;
+  late String imageBasePath;
+  setImageBasePath() async {
+    final status =
+        await _fileStorageService.checkIfApplicationImageStorageIsInit();
+    isCache = status;
     if (!status) {
-      await _firebaseStorageService
-          .startDownload(); // if images are not loaded ,it is downloaded from firebsae
+      _firebaseStorageService.startDownload();
+      imageBasePath = FirebaseManger.firebaseStorageBaseUrl;
+    } else {
+      imageBasePath = _fileStorageService.getFileImageBasePath;
     }
-    imageFiles = await _fileStorageService
-        .loadAllImageFilePath(); //loads image from loacal storage
-
-    // await checkIfDataIsConsistent(); //function to check if data in local storage is consistent with data in firebase
-    changeLoadingStatus(false);
   }
 
-  checkIfDataIsConsistent() async {
-    /*
-    function to check if data is consistent
-    */
+  performCacheAction() {
+    if (!isCache) {
+      _firebaseStorageService.startDownload();
+    } else {
+      checkForConsistency();
+    }
+  }
+
+  checkForConsistency() async {
     bool shouldRebuild = false;
     final Map<String, DateTime?> firebaseMetaData =
         await _firebaseStorageService.getFileMetadatas();
-
     final Map<String, DateTime> fileMetaData =
         await _fileStorageService.getFileMetaData();
-    imageFiles.forEach((key, value) async {
+    firebaseMetaData.forEach((key, value) async {
       if (firebaseMetaData[key] != null &&
-          fileMetaData[key]!.isAtSameMomentAs(firebaseMetaData[key]!)) {
+          fileMetaData[key] != null &&
+          fileMetaData[key]!.isBefore(firebaseMetaData[key]!)) {
         shouldRebuild = true;
         await _firebaseStorageService.downloadFile(fileName: key);
-        imageFiles[key] = _fileStorageService.getFile(fileName: key);
+        log('data downloaded-------------------');
+      } else {
+        log('data is correct');
       }
     });
-    log('i am being run');
     if (shouldRebuild) {
       notifyListeners();
     }
   }
 
-  cacheControllerDisposer() {
-    imageFiles = {};
-    isloading = false;
-  }
+  cacheControllerDisposer() {}
 }

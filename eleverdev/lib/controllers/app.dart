@@ -7,7 +7,7 @@ class AppController extends BaseController {
   static AppController instance = AppController._();
   factory AppController() => instance;
   initApp() async {
-    await CacheController.instance.loadImages();
+    await CacheController.instance.setImageBasePath();
   }
 
   disposeApp() {
