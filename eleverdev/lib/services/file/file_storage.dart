@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 
@@ -17,6 +18,7 @@ class FileStorageService {
     */
     _directory = await getApplicationDocumentsDirectory();
     _dirPath = '${_directory.path}/images/';
+    
   }
 
   String get getFileImageBasePath => _dirPath;

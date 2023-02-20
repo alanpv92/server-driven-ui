@@ -15,21 +15,23 @@ class CacheController extends BaseController {
   late bool isCache;
   late String imageBasePath;
   setImageBasePath() async {
-    final status =
-        await _fileStorageService.checkIfApplicationImageStorageIsInit();
-    isCache = status;
+    final status = await _fileStorageService
+        .checkIfApplicationImageStorageIsInit(); // checks if directory for image exists
+    log(status.toString());
+    isCache =
+        status; //set the status of image directoy to isCache varible,which can be used to determine wheater to download images or check for consistency
     if (!status) {
-      _firebaseStorageService.startDownloadUsingIsolate();
-      imageBasePath = FirebaseManger.firebaseStorageBaseUrl;
+      imageBasePath = FirebaseManger
+          .firebaseStorageBaseUrl; //if image directory does not exist then path of image is set to firebase url
     } else {
-  
-      imageBasePath = _fileStorageService.getFileImageBasePath;
+      imageBasePath = _fileStorageService
+          .getFileImageBasePath; // if image directory exists then path of image is set to file path from local storage
     }
   }
 
   performCacheAction() {
     if (!isCache) {
-      _firebaseStorageService.startDownload();
+      _firebaseStorageService.startDownloadUsingIsolate();
     } else {
       checkForConsistency();
     }

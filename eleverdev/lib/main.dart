@@ -15,14 +15,6 @@ import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:provider/provider.dart';
 
-/*
-
-1)check if image is present else show firebase url ,else file url
-2)check if contents in image directoy is not empty
-*/
-
-
-
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);

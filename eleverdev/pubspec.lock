@@ -282,7 +282,7 @@ packages:
     source: hosted
     version: "2.1.1"
   firebase_storage:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: firebase_storage
       url: "https://pub.dartlang.org"
@@ -329,7 +329,7 @@ packages:
     source: hosted
     version: "3.3.0"
   flutter_isolate:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: flutter_isolate
       url: "https://pub.dartlang.org"
@@ -505,14 +505,14 @@ packages:
     source: hosted
     version: "2.1.0"
   path:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: path
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.2"
   path_provider:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: path_provider
       url: "https://pub.dartlang.org"
