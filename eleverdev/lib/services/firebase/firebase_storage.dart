@@ -1,12 +1,10 @@
 import 'dart:developer';
 import 'dart:io';
-import 'dart:isolate';
-
 import 'package:eleverdev/firebase_options.dart';
 import 'package:eleverdev/services/file/file_storage.dart';
 import 'package:firebase_core/firebase_core.dart';
-import "package:flutter_isolate/flutter_isolate.dart";
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:isolate_handler/isolate_handler.dart';
 
 class FirebaseStorageService {
   final _firebaseStorage = FirebaseStorage.instance;
@@ -67,13 +65,16 @@ class FirebaseStorageService {
   }
 
   Future startDownloadUsingIsolate() async {
-    final revicePort = ReceivePort();
+    final isolates = IsolateHandler();
+    isolates.spawn(startDownLoadProcess);
+    // final revicePort = ReceivePort();
 
-    await FlutterIsolate.spawn(startDownLoadProcess, revicePort.sendPort);
+    // await FlutterIsolate.spawn(startDownLoadProcess, revicePort.sendPort);
   }
 }
 
-startDownLoadProcess(SendPort sendPort) async {
+@pragma('vm:entry-point')
+startDownLoadProcess(Map<String,dynamic> data) async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   final FirebaseStorage firebaseStorage = FirebaseStorage.instance;
@@ -83,6 +84,10 @@ startDownLoadProcess(SendPort sendPort) async {
 
   try {
     final allImages = await firebaseStorage.ref().listAll();
+    if (Platform.isAndroid) {
+      await Directory(FileStorageService.instance.getFileImageBasePath)
+          .create();
+    }
     for (int i = 0; i < allImages.items.length; i++) {
       final file = FileStorageService.instance.getApplicationImageStorageFile(
           fileName: allImages.items[i].fullPath);
@@ -91,7 +96,8 @@ startDownLoadProcess(SendPort sendPort) async {
         log('completed----------------');
       });
     }
+    log('sad;sadlsamldmaslmdlasmdlasmdlsamkdmaskdmaksdkasdkasmdksamdkamskdsa');
   } catch (e) {
-    log(e.toString());
+    log("error is $e");
   }
 }

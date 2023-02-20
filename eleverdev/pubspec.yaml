@@ -43,7 +43,8 @@ dependencies:
   cached_network_image: ^3.2.3
   json_annotation: ^4.8.0
   permission_handler: ^10.2.0
-  flutter_isolate: ^2.0.4  
+  flutter_isolate: ^2.0.4 
+  isolate_handler: ^1.0.2
   
 
 
