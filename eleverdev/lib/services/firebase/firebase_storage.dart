@@ -1,7 +1,6 @@
 import 'dart:developer';
+import 'dart:io';
 import 'dart:isolate';
-
-
 
 import 'package:eleverdev/firebase_options.dart';
 import 'package:eleverdev/services/file/file_storage.dart';
@@ -21,6 +20,10 @@ class FirebaseStorageService {
     */
     try {
       final allImages = await _firebaseStorage.ref().listAll();
+      if (Platform.isAndroid) {
+        await Directory(FileStorageService.instance.getFileImageBasePath)
+            .create();
+      }
       for (int i = 0; i < allImages.items.length; i++) {
         final file = FileStorageService.instance.getApplicationImageStorageFile(
             fileName: allImages.items[i].fullPath);
@@ -65,7 +68,7 @@ class FirebaseStorageService {
 
   Future startDownloadUsingIsolate() async {
     final revicePort = ReceivePort();
-    
+
     await FlutterIsolate.spawn(startDownLoadProcess, revicePort.sendPort);
   }
 }

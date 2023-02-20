@@ -4,6 +4,7 @@ import 'package:eleverdev/controllers/base.dart';
 import 'package:eleverdev/mangers/firebase.dart';
 import 'package:eleverdev/services/file/file_storage.dart';
 import 'package:eleverdev/services/firebase/firebase_storage.dart';
+import 'package:eleverdev/services/permisions/permision.dart';
 
 class CacheController extends BaseController {
   CacheController._();
@@ -29,9 +30,14 @@ class CacheController extends BaseController {
     }
   }
 
-  performCacheAction() {
+  performCacheAction() async {
     if (!isCache) {
-      _firebaseStorageService.startDownloadUsingIsolate();
+      await PermisionService.instance.requestPermision();
+      final status = await PermisionService.instance.checkPermision();
+      if (status) {
+     
+        _firebaseStorageService.startDownload();
+      }
     } else {
       checkForConsistency();
     }

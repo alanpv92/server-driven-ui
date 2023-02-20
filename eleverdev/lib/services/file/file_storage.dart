@@ -21,6 +21,8 @@ class FileStorageService {
     
   }
 
+  
+
   String get getFileImageBasePath => _dirPath;
 
   File getApplicationImageStorageFile({required fileName}) {
