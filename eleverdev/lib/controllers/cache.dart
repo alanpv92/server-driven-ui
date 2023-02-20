@@ -36,7 +36,7 @@ class CacheController extends BaseController {
       final status = await PermisionService.instance.checkPermision();
       if (status) {
      
-        _firebaseStorageService.startDownloadUsingIsolate();
+        _firebaseStorageService.startDownload();
       }
     } else {
       checkForConsistency();
