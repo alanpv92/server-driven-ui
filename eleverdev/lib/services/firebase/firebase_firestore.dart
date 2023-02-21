@@ -34,6 +34,7 @@ class FirebaseFireStoreService {
     final card1 = <String, dynamic>{
       "pos": 0,
       "text": "alan",
+      "imageExists":true,
       "textStyle": {"color": "#ED9728", "fontSize": 10, "fontWeight": 100},
       "bgColor": "#070200",
       "imageCons": {
@@ -51,6 +52,7 @@ class FirebaseFireStoreService {
     final card2 = <String, dynamic>{
       "pos": 1,
       "text": "alan1",
+      "imageExists":true,
       "textStyle": {"color": "#e61f34", "fontSize": 20, "fontWeight": 100},
       "imageCons": {
         "height": 50,
@@ -68,6 +70,7 @@ class FirebaseFireStoreService {
     final card3 = <String, dynamic>{
       "pos": 2,
       "text": "alan",
+      "imageExists":true,
       "textStyle": {"color": "#FFFFFF", "fontSize": 10, "fontWeight": 100},
       "imageCons": {
         "height": 50,

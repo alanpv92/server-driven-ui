@@ -10,11 +10,13 @@ part 'card_config.g.dart';
 @JsonSerializable(explicitToJson: true)
 class CardConfig {
   final String? text;
+  final String? textAlign;
   final String? bgColor;
   final CardTextStyle? textStyle;
   final CardImageCons? imageCons;
   final CardOnPress? onTap;
   final bool? visibility;
+  final bool? imageExists;
   String? imageUrl;
   CardConfig(
       {required this.bgColor,
@@ -22,6 +24,8 @@ class CardConfig {
       required this.text,
       required this.onTap,
       required this.imageCons,
+      required this.imageExists,
+      required this.textAlign,
       this.imageUrl,
       required this.visibility});
   factory CardConfig.fromJson(Map<String, dynamic> json) =>

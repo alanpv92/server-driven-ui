@@ -27,4 +27,25 @@ class AlignmentHelper {
         return null;
     }
   }
+
+  static TextAlign getTextAlign(String? textAlign) {
+    switch (textAlign) {
+      case null:
+        return TextAlign.center;
+      case "TextAlign.center":
+        return TextAlign.center;
+      case "TextAlign.end":
+        return TextAlign.end;
+      case "TextAlign.justify":
+        return TextAlign.justify;
+      case "TextAlign.left":
+        return TextAlign.left;
+      case "TextAlign.right":
+        return TextAlign.right;
+      case "TextAlign.start":
+        return TextAlign.start;
+      default:
+        return TextAlign.center;
+    }
+  }
 }

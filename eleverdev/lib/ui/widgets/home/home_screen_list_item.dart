@@ -1,8 +1,7 @@
-import 'dart:developer';
-
 import 'package:eleverdev/controllers/cache.dart';
 import 'package:eleverdev/data/extentions/extentions.dart';
 import 'package:eleverdev/data/models/card_config.dart';
+import 'package:eleverdev/helpers/alignment._helper.dart';
 
 import 'package:eleverdev/ui/widgets/common/custom_cached_image.dart';
 import 'package:flutter/material.dart';
@@ -27,10 +26,13 @@ class HomeScreenListItem extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   if (cardConfig.text != null)
                     Text(
                       cardConfig.text!,
+                      
+                      textAlign: AlignmentHelper.getTextAlign(cardConfig.textAlign),
                       style: cardConfig.textStyle?.getCardTextStyle,
                     ),
                   Align(
@@ -41,10 +43,13 @@ class HomeScreenListItem extends StatelessWidget {
                       child: Consumer(
                         builder: (context, value, child) {
                           Provider.of<CacheController>(context);
-                          return CustomCachedImage(
-                              key: UniqueKey(),
-                              id: id,
-                              cardImageCons: cardConfig.imageCons);
+                          return Visibility(
+                            visible: cardConfig.imageExists ?? true,
+                            child: CustomCachedImage(
+                                key: UniqueKey(),
+                                id: id,
+                                cardImageCons: cardConfig.imageCons),
+                          );
                         },
                       )),
                 ],
