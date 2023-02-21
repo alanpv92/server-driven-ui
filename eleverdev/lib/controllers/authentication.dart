@@ -10,8 +10,11 @@ import 'package:eleverdev/ui/widgets/common/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
 class AuthenticationController extends BaseController {
+  //creates an private constructor of AuthenticationController
   AuthenticationController._();
+  // creates an static instance of AuthenticationController
   static AuthenticationController instance =AuthenticationController._();
+  //returns static instance whenever AuthenticationController contructor is called
   factory AuthenticationController()=>instance;
 
   late GlobalKey<FormState> authFormKey;

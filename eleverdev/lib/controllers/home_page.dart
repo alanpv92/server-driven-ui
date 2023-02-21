@@ -8,32 +8,28 @@ import 'package:eleverdev/services/firebase/firebase_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 
-/*
-This class contains all the functions required for home page of this application
-*/
-
 class HomePageController extends BaseController {
+  //creates an private contructor of HomePageController
   HomePageController._();
+  //creates an static instance of HomePageController
   static HomePageController instance = HomePageController._();
+  //returns the static instance when contructor of HomePageController is  called
   factory HomePageController() => instance;
+  //creates an instance of FirebaseFireStoreService
   final FirebaseFireStoreService _firebaseFireStoreService =
-      FirebaseFireStoreService(); //creates an instance of firebse service
+      FirebaseFireStoreService();
 
   Stream<QuerySnapshot<Map<String, dynamic>>> getSnapShot() {
+    // function returns an stream for collection cardConfigCollection
     final snap = _firebaseFireStoreService.getCollectionQuerySnapShot(
         collectionName: FirebaseManger.cardConfigCollection);
     return snap;
-  } // function returns an stream for collection cardConfigCollection
+  }
 
   final List<CardModel> cards = [];
 
   void populateListView(List<DocumentSnapshot> data) {
-    /* 
-
-    function to populate card data according to firebase configrations
-
-    */
-
+    //function to populate card data according to firebase configrations
     cards.clear();
     for (var element in data) {
       final elementData = element.data() as Map<String, dynamic>;
@@ -44,10 +40,7 @@ class HomePageController extends BaseController {
   }
 
   showGetSnackBar() {
-    /*
-     This function shows an snackbar when called
-
-    */
+    // This function shows an snackbar when called
     Get.snackbar('u clicked card', '',
         snackPosition: SnackPosition.BOTTOM,
         colorText: Colors.white,
