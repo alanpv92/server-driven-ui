@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 
@@ -57,7 +58,7 @@ class FileStorageService {
     return imageFiles;
   }
 
-  getFileMetaData() { 
+  getFileMetaData() {
     // function used to get metadata of files in image directoy
     final Map<String, DateTime> imageFiles = {};
     //creates directory for image directory
@@ -73,10 +74,20 @@ class FileStorageService {
     return imageFiles;
   }
 
-  File getFile({required String fileName}) { 
+  File getFile({required String fileName}) {
     //function used to get a single file
     final path = "$_dirPath$fileName";
     File file = File(path);
     return file;
+  }
+
+  deleteFile({required String fileName}) async {
+    try {
+      final path = "$_dirPath$fileName";
+      File file = File(path);
+      await file.delete();
+    } catch (e) {
+      log('file could not be deleted');
+    }
   }
 }

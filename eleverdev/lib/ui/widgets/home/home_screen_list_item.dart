@@ -1,9 +1,12 @@
+import 'dart:developer';
 
+import 'package:eleverdev/controllers/cache.dart';
 import 'package:eleverdev/data/extentions/extentions.dart';
 import 'package:eleverdev/data/models/card_config.dart';
 
 import 'package:eleverdev/ui/widgets/common/custom_cached_image.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreenListItem extends StatelessWidget {
   final CardConfig cardConfig;
@@ -31,13 +34,19 @@ class HomeScreenListItem extends StatelessWidget {
                       style: cardConfig.textStyle?.getCardTextStyle,
                     ),
                   Align(
-                    alignment: cardConfig.imageCons == null
-                        ? Alignment.center
-                        : cardConfig.imageCons!.getAlignment ??
-                            Alignment.center,
-                    child: CustomCachedImage(
-                        id: id, cardImageCons: cardConfig.imageCons),
-                  ),
+                      alignment: cardConfig.imageCons == null
+                          ? Alignment.center
+                          : cardConfig.imageCons!.getAlignment ??
+                              Alignment.center,
+                      child: Consumer(
+                        builder: (context, value, child) {
+                          Provider.of<CacheController>(context);
+                          return CustomCachedImage(
+                              key: UniqueKey(),
+                              id: id,
+                              cardImageCons: cardConfig.imageCons);
+                        },
+                      )),
                 ],
               ),
             )),
