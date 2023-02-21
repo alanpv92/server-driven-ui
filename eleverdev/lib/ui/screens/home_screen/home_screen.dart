@@ -2,7 +2,9 @@ import 'dart:developer';
 
 import 'package:eleverdev/controllers/authentication.dart';
 import 'package:eleverdev/controllers/home_page.dart';
+import 'package:eleverdev/mangers/routes.dart';
 import 'package:eleverdev/mangers/text.dart';
+import 'package:eleverdev/ui/screens/error/retry_screen.dart';
 
 import 'package:eleverdev/ui/widgets/home/home_screen_list_view.dart';
 
@@ -14,6 +16,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+ 
     final homeScreenController =
         Provider.of<HomePageController>(context, listen: false);
     return Scaffold(
@@ -38,8 +41,7 @@ class HomeScreen extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return Center(
-              child: Text(TextManger.instance.errorText),
-            );
+                child: RetryScreen(routeName: Routes.homeScreenRoute));
           } else if (snapshot.connectionState == ConnectionState.active &&
               snapshot.hasData) {
             if (snapshot.data!.docs.isEmpty) {

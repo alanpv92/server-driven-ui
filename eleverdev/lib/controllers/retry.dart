@@ -1,9 +1,8 @@
 import 'dart:developer';
 
-import 'package:eleverdev/controllers/authentication.dart';
+
 import 'package:eleverdev/controllers/base.dart';
-import 'package:eleverdev/main.dart';
-import 'package:eleverdev/mangers/routes.dart';
+
 import 'package:eleverdev/ui/screens/authentication/authentication.dart';
 import 'package:eleverdev/ui/screens/splash/splash.dart';
 import 'package:firebase_auth/firebase_auth.dart';
