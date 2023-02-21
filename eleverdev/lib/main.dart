@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:eleverdev/controllers/authentication.dart';
 import 'package:eleverdev/controllers/cache.dart';
@@ -8,6 +11,7 @@ import 'package:eleverdev/mangers/routes.dart';
 import 'package:eleverdev/mangers/theme.dart';
 import 'package:eleverdev/services/file/file_storage.dart';
 import 'package:eleverdev/ui/screens/authentication/authentication.dart';
+import 'package:eleverdev/ui/screens/error/retry_screen.dart';
 import 'package:eleverdev/ui/screens/splash/splash.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -65,7 +69,6 @@ AuthManger listens for authStateChanges and if user is logged in HomeScreen is s
 
 class AuthManger extends StatelessWidget {
   const AuthManger({super.key});
-
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
@@ -76,6 +79,11 @@ class AuthManger extends StatelessWidget {
             body: Center(
               child: CircularProgressIndicator(),
             ),
+          );
+        }
+        if (snapshot.hasError) {
+          return const RetryScreen(
+            routeName: '',
           );
         }
         if (snapshot.hasData) {

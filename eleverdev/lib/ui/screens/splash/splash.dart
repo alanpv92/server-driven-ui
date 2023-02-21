@@ -1,19 +1,30 @@
+import 'dart:developer';
+
 import 'package:eleverdev/controllers/app.dart';
 import 'package:eleverdev/helpers/media_query.dart';
+import 'package:eleverdev/mangers/routes.dart';
 import 'package:eleverdev/mangers/text.dart';
+import 'package:eleverdev/ui/screens/error/retry_screen.dart';
 import 'package:eleverdev/ui/screens/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
+
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+ 
     return Scaffold(
       body: SafeArea(
           child: FutureBuilder(
         future: AppController.instance.initApp(),
         builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return  RetryScreen(
+              routeName: Routes.splashScreen,
+            );
+          }
           if (snapshot.connectionState == ConnectionState.done) {
             return const HomeScreen();
           } else {

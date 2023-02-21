@@ -18,7 +18,7 @@ class CustomCachedImage extends StatelessWidget {
         ? Image.file(
             key: UniqueKey(),
             File(
-                "${cachedControllerProvider.imageBasePath}$id${AppManager.FirebaseStorageFormat}"),
+                "${cachedControllerProvider.imageBasePath}$id${AppManager.firebaseStorageFormat}"),
             height: cardImageCons?.getHeight,
             width: cardImageCons?.getWidth,
             errorBuilder: (context, error, stackTrace) {
@@ -27,7 +27,7 @@ class CustomCachedImage extends StatelessWidget {
           )
         : Image.network(
             key: UniqueKey(),
-            "${cachedControllerProvider.imageBasePath}$id${AppManager.FirebaseStorageFormat}?alt=media",
+            "${cachedControllerProvider.imageBasePath}$id${AppManager.firebaseStorageFormat}?alt=media",
             height: cardImageCons?.getHeight,
             loadingBuilder: (context, child, loadingProgress) {
               if (loadingProgress == null) {

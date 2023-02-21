@@ -10,6 +10,10 @@ import 'package:eleverdev/ui/widgets/common/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
 class AuthenticationController extends BaseController {
+  AuthenticationController._();
+  static AuthenticationController instance =AuthenticationController._();
+  factory AuthenticationController()=>instance;
+
   late GlobalKey<FormState> authFormKey;
   late TextEditingController emailController;
   late TextEditingController passwordController;
@@ -140,14 +144,14 @@ class AuthenticationController extends BaseController {
     authMode = AuthMode.login;
   }
 
-  onlogOut() {
+  onlogOut() async{
     /*
     
     This function is used to log out user
 
 
     */
-    AppController.instance.disposeApp();
-    _firebaseAuthService.logout();
+   await AppController.instance.disposeApp();
+   await _firebaseAuthService.logout();
   }
 }

@@ -17,6 +17,7 @@ class CommonTextManger {
   final String errorText = tr('show_tost_error');
   final String noData = tr('no_data');
   final String errorScreenContent = tr('error_page_content');
+  final String tapToRetry = tr('tap_to_retry');
 }
 
 class TextManger with AuthTextManger, CommonTextManger {

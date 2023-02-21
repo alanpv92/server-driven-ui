@@ -1,3 +1,3 @@
 class AppManager {
-  static String FirebaseStorageFormat = '.jpg';
+  static String firebaseStorageFormat = '.jpg';
 }

@@ -3,6 +3,6 @@ import 'package:eleverdev/mangers/firebase.dart';
 
 class FirebaseHelper {
   static getImagePath({required String id}) {
-    return "${FirebaseManger.firebaseStorageBaseUrl}$id${AppManager.FirebaseStorageFormat}?alt=media";
+    return "${FirebaseManger.firebaseStorageBaseUrl}$id${AppManager.firebaseStorageFormat}?alt=media";
   }
 }

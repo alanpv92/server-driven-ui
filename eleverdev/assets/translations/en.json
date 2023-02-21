@@ -4,5 +4,6 @@
   "auth_login_redirect":"already have an account ?",
   "show_tost_error":"some error occurred",
   "no_data":"No Data",
-  "error_page_content":"oops something went wrong"
+  "error_page_content":"oops something went wrong",
+  "tap_to_retry":"Tap To Retry"
 }
