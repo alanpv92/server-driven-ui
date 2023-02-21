@@ -16,7 +16,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
- 
     final homeScreenController =
         Provider.of<HomePageController>(context, listen: false);
     return Scaffold(
@@ -40,8 +39,7 @@ class HomeScreen extends StatelessWidget {
         stream: homeScreenController.getSnapShot(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            return Center(
-                child: RetryScreen(routeName: Routes.homeScreenRoute));
+            return RetryScreen(routeName: Routes.homeScreenRoute);
           } else if (snapshot.connectionState == ConnectionState.active &&
               snapshot.hasData) {
             if (snapshot.data!.docs.isEmpty) {

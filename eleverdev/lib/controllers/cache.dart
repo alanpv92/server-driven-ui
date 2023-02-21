@@ -22,6 +22,7 @@ class CacheController extends BaseController {
     isCache =
         status; //set the status of image directoy to isCache varible,which can be used to determine wheater to download images or check for consistency
     if (!status) {
+      log('using firbase url');
       imageBasePath = FirebaseManger
           .firebaseStorageBaseUrl; //if image directory does not exist then path of image is set to firebase url
     } else {
@@ -35,7 +36,7 @@ class CacheController extends BaseController {
       await PermisionService.instance.requestPermision();
       final status = await PermisionService.instance.checkPermision();
       if (status) {
-     
+        log('i am being called');
         _firebaseStorageService.startDownload();
       }
     } else {

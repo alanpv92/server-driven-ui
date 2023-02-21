@@ -1,42 +1,27 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
-import 'package:eleverdev/firebase_options.dart';
 import 'package:eleverdev/mangers/firebase.dart';
 import 'package:eleverdev/services/file/file_storage.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_isolate/flutter_isolate.dart';
 import 'package:http/http.dart' show get;
-import 'package:isolate_handler/isolate_handler.dart';
 import 'package:path_provider/path_provider.dart';
 
 class FirebaseStorageService {
+  //creates an instance of firebase storage
   final _firebaseStorage = FirebaseStorage.instance;
-
   Future startDownload() async {
-    /*
-     
-     function to download all images from firebase storage
-
-    */
+    //function to download all images from firebase storage
     try {
-      final allImages = await _firebaseStorage
-          .ref()
-          .listAll(); // lists all images in firebase storage
-      if (Platform.isAndroid) {
-        // creates an directory if the platfrom is andriod
-        await Directory(FileStorageService.instance.getFileImageBasePath)
-            .create();
-      }
-      for (int i = 0; i < 3; i++) {
-        final file = FileStorageService.instance.getApplicationImageStorageFile(
-            fileName:
-                allImages.items[i].fullPath); //creates a path for the file
-        final downloadTask = allImages.items[i]
-            .writeToFile(file); //starts downloading image to that file
-        await downloadTask;
+      // lists all images in firebase storage
+      final allImages = await _firebaseStorage.ref().listAll();
+      // creates an directory to save images
+      await Directory(FileStorageService.instance.getFileImageBasePath)
+          .create();
+      for (int i = 0; i < allImages.items.length; i++) {
+        //function to  download each image from firebase storage
+        await startDownloadUsingUrl(fileName: allImages.items[i].fullPath);
       }
     } catch (e) {
       log(e.toString());
@@ -44,101 +29,62 @@ class FirebaseStorageService {
   }
 
   Future<Map<String, DateTime?>> getFileMetadatas() async {
-    /*
-
-
-     function to get metaData from firebase
-
-    */
+    //function to get metaData from firebase
     final Map<String, DateTime?> fileMetaData = {};
+    // lists all images in firebase storage
     final allImages = await _firebaseStorage.ref().listAll();
-
     for (int i = 0; i < allImages.items.length; i++) {
+      //gets metadata of each image and stores in metaData varible
       final metaData = await allImages.items[i].getMetadata();
+      //saves the updated time of file from metaData to fileMetaData
       fileMetaData[allImages.items[i].name] = metaData.updated;
     }
-
     return fileMetaData;
   }
 
   Future downloadFile({required String fileName}) async {
-    /*
-     
-     function to download single file
-   
-    */
+    // function to download single file
+    // lists all images in firebase storage
     final ref = _firebaseStorage.ref().child(fileName);
+    // gets file for saving image
     final file = FileStorageService.instance
         .getApplicationImageStorageFile(fileName: fileName);
+    // starts downloading image to file
     final downloadTask = ref.writeToFile(file);
     await downloadTask;
   }
 
-  Future startDownloadUsingIsolate() async {
-    /*
-       function to start download process using isolates
-    */
-    final isolates = IsolateHandler();
-    isolates.spawn(startDownLoadProcess);
+  startDownloadUsingUrl({required String fileName}) async {
+    // start downloading each image from firebase storage
+    final Map<String, String> data = {};
+    data['fileName'] = fileName;
+    //converts map to string
+    final conData = json.encode(data);
+    //spwans an isolate that downloads the image
+    await flutterCompute(startDowloadProcessUsingUrl, conData);
   }
-
-  // startDownloadUsingUrl(
-  //     {required String fileName, required String filePath}) async {
-  //   final Map<String, String> data = {};
-  //   data['fileName'] = fileName;
-  //   final conData = json.encode(data);
-  //   await flutterCompute(startDowloadProcessUsingUrl, conData);
-  // }
 }
 
-// @pragma('vm:entry-point')
-// startDowloadProcessUsingUrl(String data) async {
-//   try {
-//     final conData = json.decode(data);
-//     // final uri = Uri.parse(
-//     //     "${FirebaseManger.firebaseStorageBaseUrl}${conData['fileName']}?alt=media");
-//     final uri = Uri.parse('https://picsum.photos/200/300');
-//     var path = await getApplicationDocumentsDirectory();
-//     final filePath = "${path.path}/images/${conData['fileName']}";
-//     log('path of file $filePath');
-//     final file = File(filePath);
-//     log('3333333333333333');
-//     var response = await get(uri);
-//     log('55555555555555');
-//     file.writeAsBytesSync(response.bodyBytes);
-
-//     log(conData.toString());
-//   } catch (e) {
-//     log('error is $e');
-//   }
-// }
-
-startDownLoadProcess(Map<String, dynamic> data) async {
-  await Firebase.initializeApp(
-      options: DefaultFirebaseOptions
-          .currentPlatform); //initializes firebase app for the spawned isolate
-
-  final FirebaseStorage firebaseStorage = FirebaseStorage
-      .instance; //creates an instance of firebase storage for the spawned isolate
-
-  final FileStorageService fileStorageService =
-      FileStorageService(); //creates an instance of file storage service for the spawned isolate
-  await fileStorageService
-      .initFileStorageService(); // initilized the firebase storage service for spawned isolate
-
+@pragma('vm:entry-point')
+startDowloadProcessUsingUrl(String data) async {
   try {
-    final allImages = await firebaseStorage.ref().listAll();// lists all images in firebase storage
-    if (Platform.isAndroid) {
-      await Directory(FileStorageService.instance.getFileImageBasePath)
-          .create();// creates an directory if the platfrom is andriod
-    }
-    for (int i = 0; i < allImages.items.length; i++) {
-      final file = FileStorageService.instance.getApplicationImageStorageFile(
-          fileName: allImages.items[i].fullPath); 
-      final downloadTask = allImages.items[i].writeToFile(file); //starts downloading the image to the file
-      downloadTask.whenComplete(() {});
-    }
+    //function that runs in seperate isolate to download image
+    //converts data from string to map
+    final conData = json.decode(data);
+    //creates uri to download image from firebase
+    final uri = Uri.parse(
+        "${FirebaseManger.firebaseStorageBaseUrl}${conData['fileName']}?alt=media");
+    //get path of directory to save image
+    var path = await getApplicationDocumentsDirectory();
+    //creates a file path with directory path and filename
+    final filePath = "${path.path}/images/${conData['fileName']}";
+    //creates a file using the file path
+    final file = File(filePath);
+    //downloads the data using uri
+    var response = await get(uri);
+    //writes to data as bytes to file
+    file.writeAsBytesSync(response.bodyBytes);
   } catch (e) {
-    log("error is $e");
+    log('error is $e');
   }
 }

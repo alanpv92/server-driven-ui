@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:eleverdev/controllers/cache.dart';
 import 'package:eleverdev/data/models/card_config.dart';
 import 'package:eleverdev/helpers/app.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -22,7 +23,7 @@ class CustomCachedImage extends StatelessWidget {
             height: cardImageCons?.getHeight,
             width: cardImageCons?.getWidth,
             errorBuilder: (context, error, stackTrace) {
-              return const Icon(Icons.error);
+              return const SizedBox();
             },
           )
         : Image.network(
@@ -39,7 +40,7 @@ class CustomCachedImage extends StatelessWidget {
             },
             width: cardImageCons?.getWidth,
             errorBuilder: (context, error, stackTrace) {
-              return const Icon(Icons.error);
+              return const SizedBox();
             });
   }
 }

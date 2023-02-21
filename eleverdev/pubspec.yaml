@@ -45,6 +45,7 @@ dependencies:
   permission_handler: ^10.2.0
   flutter_isolate: ^2.0.4 
   isolate_handler: ^1.0.2
+  http: ^0.13.5
   
 
 
